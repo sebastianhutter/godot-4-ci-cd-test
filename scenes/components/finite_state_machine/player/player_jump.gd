@@ -1,7 +1,39 @@
 extends State
 class_name PlayerJump
 
+# ========
+# singleton references
+# ========
+
+# ========
+# export vars
+# ========
+
 @export var player: Player
+
+# ========
+# class signals
+# ========
+
+# ========
+# class onready vars
+# ========
+
+# ========
+# class vars
+# ========
+
+# ========
+# godot functions
+# ========
+
+# ========
+# signal handler
+# ========
+
+# ========
+# class functions
+# ========
 
 func enter() -> void:
 	

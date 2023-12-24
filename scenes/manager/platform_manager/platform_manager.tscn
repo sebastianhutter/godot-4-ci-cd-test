@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://tcmw5uecl7me"]
+[gd_scene load_steps=2 format=3 uid="uid://tcmw5uecl7me"]
+
+[ext_resource type="Script" path="res://scenes/manager/platform_manager/platform_manager.gd" id="1_ea4lc"]
 
 [node name="PlatformManager" type="Node"]
+script = ExtResource("1_ea4lc")

@@ -2,6 +2,15 @@
 extends AnimatableBody2D
 class_name Platform
 
+
+# ========
+# singleton references
+# ========
+
+# ========
+# export vars
+# ========
+
 @export_enum("cake", "grass", "sand", "snow", "stone", "wood") var platform_environment: String = "grass":
 	set(val):
 		platform_environment = val
@@ -20,31 +29,47 @@ class_name Platform
 		_load_sprite_texture() if not Engine.is_editor_hint() else _load_sprite_texture_from_editor()
 		_enable_collision_polygon()
 
+# ========
+# class signals
+# ========
+
+# ========
+# class onready vars
+# ========
+
 @onready var sprite: Sprite2D = %Sprite2D
 @onready var collision_polygon: CollisionPolygon2D = %CollisionPolygonPlatform
 @onready var collision_polygon_small: CollisionPolygon2D = %CollisionPolygonPlatformSmall
 
+# ========
+# class vars
+# ========
+
+# ========
+# godot functions
+# ========
 
 func _ready() -> void:
 	print("is ready executed?")
 	_load_sprite_texture() if not Engine.is_editor_hint() else _load_sprite_texture_from_editor()
 	_enable_collision_polygon()
 
+# ========
+# signal handler
+# ========
+
+# ========
+# class functions
+# ========
+
 func _load_sprite_texture() -> void:
 	# the function loads the sprite depending on the initial configuration
 	# of the platform environment, and is flags
 	
-	print("are we at least here?")
-	
 	if not sprite:
 		return
-		
-	print("you should be here right?")
 	
 	var texture: Texture2D = PlatformTextures.get_platform_texture(platform_environment, is_small_platform, is_broken_platform)
-	
-	print("and now here")
-	print(texture)
 	sprite.set_texture(texture)
 
 func _load_sprite_texture_from_editor() -> void:

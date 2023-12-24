@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://boxmeye2qqxew"]
+
+[ext_resource type="Script" path="res://scenes/manager/menu_manager/menu_manager.gd" id="1_jmxq8"]
+
+[node name="MenuManager" type="CanvasLayer"]
+script = ExtResource("1_jmxq8")

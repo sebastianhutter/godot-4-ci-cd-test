@@ -1,9 +1,41 @@
 extends State
 class_name PlayerFall
 
+# ========
+# singleton references
+# ========
+
+# ========
+# export vars
+# ========
+
 @export var player: Player
 
+# ========
+# class signals
+# ========
+
+# ========
+# class onready vars
+# ========
+
+# ========
+# class vars
+# ========
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+# ========
+# godot functions
+# ========
+
+# ========
+# signal handler
+# ========
+
+# ========
+# class functions
+# ========
 
 func enter() -> void:
 	# play idle animation 

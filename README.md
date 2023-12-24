@@ -18,5 +18,5 @@ Todo list will be removed sooner or later
 All assets used in this projects are from [kenney.nl](https://kenney.nl/).
 The assets are licensed under the [Creative Commons Zero, CC0](http://creativecommons.org/publicdomain/zero/1.0/) license.
 
-- https://kenney.nl/assets/simplified-platformer-pack
+- https://kenney.nl/assets/interface-sounds
 - https://kenney.nl/assets/jumper-pack
