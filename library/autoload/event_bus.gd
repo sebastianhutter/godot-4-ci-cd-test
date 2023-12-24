@@ -1,5 +1,5 @@
-extends Node2D
-class_name Main
+extends Node
+class_name EventBusSingleton
 
 # ========
 # singleton references
@@ -9,18 +9,21 @@ class_name Main
 # export vars
 # ========
 
-# duplicated values from "library/game_state_enum.gd"
-@export_enum("MENU", "GAME_LOOP", "PAUSE") var default_game_state: int = 0
-
 # ========
 # class signals
 # ========
+
+# game state signals
+signal play_game_requested()
+signal quit_game_requested()
+signal pause_game_requested()
+signal continue_game_requested()
+signal return_to_main_menu_requested()
 
 # ========
 # class onready vars
 # ========
 
-@onready var game_manager: GameManager = %GameManager
 
 # ========
 # class vars
@@ -30,12 +33,6 @@ class_name Main
 # godot functions
 # ========
 
-func _ready() -> void:
-	if not game_manager:
-		return
-		
-	game_manager.initiate_game(default_game_state)
-
 # ========
 # signal handler
 # ========
@@ -43,3 +40,4 @@ func _ready() -> void:
 # ========
 # class functions
 # ========
+

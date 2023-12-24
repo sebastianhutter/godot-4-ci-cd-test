@@ -8,6 +8,8 @@
 [node name="Player" parent="." instance=ExtResource("1_ueaw8")]
 position = Vector2(110, -394)
 scale = Vector2(1, 0.986797)
+jump_velocity = -400.0
+allowed_jumps = 3
 
 [node name="Platform" parent="." instance=ExtResource("2_ldpgu")]
 position = Vector2(3, 14)

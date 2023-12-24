@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://boxmeye2qqxew"]
+[gd_scene load_steps=5 format=3 uid="uid://boxmeye2qqxew"]
 
 [ext_resource type="Script" path="res://scenes/manager/menu_manager/menu_manager.gd" id="1_jmxq8"]
+[ext_resource type="PackedScene" uid="uid://gu0bcx2kda03" path="res://scenes/menu/options_menu/options_menu.tscn" id="2_qs7en"]
+[ext_resource type="PackedScene" uid="uid://lrtgfxdhlk13" path="res://scenes/menu/main_menu/main_menu.tscn" id="3_g1vb5"]
+[ext_resource type="PackedScene" uid="uid://c8ew1lrlsxjut" path="res://scenes/menu/pause_menu/pause_menu.tscn" id="4_cy0sj"]
 
 [node name="MenuManager" type="CanvasLayer"]
 script = ExtResource("1_jmxq8")
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_qs7en")]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="." instance=ExtResource("3_g1vb5")]
+unique_name_in_owner = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_cy0sj")]
+unique_name_in_owner = true

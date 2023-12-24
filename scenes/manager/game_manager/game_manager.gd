@@ -23,12 +23,6 @@ class_name GameManager
 
 var managers: Array[Manager] = []
 
-enum GAME_STATE {
-	MENU,
-	GAME_LOOP,
-	PAUSE,
-}
-
 var current_game_state: int: 
 	set(val):
 		match val:
@@ -57,13 +51,10 @@ func _ready() -> void:
 
 		managers.append(child)
 
-#func _unhandled_input(event) -> void:
-	## handle input which wasnt handled by any other object
-#
-	#if event is InputEventKey:
-		## handle escape key presses
-		#if event.pressed and event.keycode == KEY_ESCAPE:
-			#menu_manager.handle_escape_key()
+	EventBus.quit_game_requested.connect(_on_quit_game_requested)
+	EventBus.play_game_requested.connect(_on_play_game_requested)
+	EventBus.pause_game_requested.connect(_on_pause_game_requested)
+	EventBus.return_to_main_menu_requested.connect(_on_return_to_main_menu_requested)
 
 
 # ========
@@ -94,9 +85,10 @@ func _on_return_to_main_menu_requested() -> void:
 # class functions
 # ========
 
-func initiate_game(initial_game_state: GAME_STATE = GAME_STATE.MENU) -> void:
+func initiate_game(initial_game_state: int) -> void:
 	# called by the main scene in ready
 	
+
 	current_game_state = initial_game_state
 
 func _quit_game() -> void:

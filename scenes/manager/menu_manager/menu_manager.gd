@@ -1,24 +1,39 @@
 extends Manager
 class_name MenuManager
 
-const MODULE = "MenuManager"
 
-@onready var factory_menu: FactoryMenu = %FactoryMenu
+# ========
+# singleton references
+# ========
+
+# ========
+# export vars
+# ========
+
+# ========
+# class signals
+# ========
+
+# ========
+# class onready vars
+# ========
+
 @onready var main_menu: MainMenu = %MainMenu
 @onready var pause_menu: PauseMenu = %PauseMenu
 @onready var options_menu: OptionsMenu = %OptionsMenu
-@onready var win_menu: GameOverWinMenu = %WinMenu
-@onready var loose_menu: GameOverLooseMenu = %LooseMenu
+
+# ========
+# class vars
+# ========
 
 # stores the currently opened menu (if any)
 var menu_stack: Array[Menu] = []
 
-func _init():
-	Logger.add_module(MODULE)
+# ========
+# godot functions
+# ========
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	# connect all button signals, the menu manager can handle the transition between the menus
+func _ready() -> void:
 	if main_menu:
 		main_menu.play_button_pressed.connect(_on_main_menu_play_button_pressed)
 		main_menu.options_button_pressed.connect(_on_any_options_button_pressed)
@@ -31,12 +46,25 @@ func _ready():
 		pause_menu.continue_button_pressed.connect(_on_pause_menu_continue_button_pressed)
 		pause_menu.options_button_pressed.connect(_on_any_options_button_pressed)
 		pause_menu.quit_to_menu_button_pressed.connect(_on_pause_menu_quit_to_menu_button_pressed)
+		
+	_hide_menus()
+
+func _unhandled_input(event) -> void:
+	""" handle escape key presses for / in the menu """
+
+	if event is InputEventKey:
+		# handle escape key presses
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			handle_escape_key()
 
 
-	
-	# in game menues are requested from the scenes in the world scene, so need to work via the 
-	# event bus
-	EventBus.factory_menu_requested.connect(_on_factory_menu_requested)
+# ========
+# signal handler
+# ========
+
+# ========
+# class functions
+# ========
 
 func show_menu(menu: int, hide_last_menu: bool = true) -> void:
 	"""show the given menu"""
@@ -45,7 +73,6 @@ func show_menu(menu: int, hide_last_menu: bool = true) -> void:
 	# so the game state manager is able to run show_menu too!
 	var new_menu = _resolve_menu_enum(menu)
 	if new_menu == null:
-		Logger.warn("New menu is null", MODULE)
 		return
 
 	if menu_stack.size() > 0:
@@ -81,21 +108,13 @@ func _resolve_menu_enum(menu: int) -> Menu:
 	"""resolves the enum to a menu or null"""
 
 	match menu:
-		MENUS.MAIN:
+		MENU.MAIN:
 			return main_menu
-		MENUS.OPTIONS:
+		MENU.OPTIONS:
 			return options_menu
-		MENUS.PAUSE:
+		MENU.PAUSE:
 			return pause_menu
-		MENUS.WIN:
-			return win_menu
-		MENUS.LOOSE:
-			return loose_menu
-		MENUS.FACTORY:
-			return factory_menu
-		_:
-			Logger.error("Menu not found", MODULE)
-			
+
 	return null
 
 func _show_last_menu() -> void:
@@ -106,23 +125,6 @@ func _show_last_menu() -> void:
 		current_menu.hide_menu()
 		menu_stack.append(new_menu.show_menu())
 
-
-func _on_factory_menu_requested(action: int) -> void:
-	 # open or close the factory menu, the menu is an ingame menu so the state remains in game loop
-
-	Logger.info("Factory Menu request received", MODULE)
-
-	match action:
-		MENU_ACTIONS.OPEN:
-			_show_factory_menu()
-		MENU_ACTIONS.CLOSE:
-			_hide_factory_menu()
-		MENU_ACTIONS.TOGGLE:
-			# if menu_stack.back() == factory_menu:
-			if menu_stack.has( factory_menu ): 
-				_hide_factory_menu()
-			else:
-				_show_factory_menu()
 
 
 func _on_any_back_button_pressed() -> void:
@@ -135,7 +137,7 @@ func _on_any_options_button_pressed() -> void:
 	"""called when the options button is pressed in any menu"""
 
 	# set the game state to playing
-	show_menu(MENUS.OPTIONS)
+	show_menu(MENU.OPTIONS)
 	
 
 func _on_main_menu_play_button_pressed() -> void:
@@ -160,7 +162,7 @@ func _on_pause_menu_continue_button_pressed() -> void:
 	
 func _transition_to_menu() -> void:
 	_hide_menus()
-	show_menu(MENUS.MAIN)
+	show_menu(MENU.MAIN)
 
 func _transition_to_game_loop() -> void:
 	# we could hide all menus here, but we have in game menus so lets manage the
@@ -173,7 +175,7 @@ func _transition_to_game_loop() -> void:
 	_hide_menus()
 	
 func _transition_to_pause() -> void:
-	show_menu(MENUS.PAUSE, false)
+	show_menu(MENU.PAUSE, false)
 	
 func _hide_menus() -> void:
 	"""hide all game menus"""
@@ -184,11 +186,9 @@ func _hide_menus() -> void:
 
 func _unpause_game() -> void:
 	if menu_stack.size() <= 0:
-		Logger.warn("No menus even though in pause?", MODULE)
 		return
 		
 	if menu_stack.back() != pause_menu:
-		Logger.warn("Pause menu is not in front.", MODULE)
 		return
 		
 	pause_menu.hide_menu()
@@ -200,12 +200,3 @@ func _pause_game() -> void:
 	
 func _quit_game() -> void:
 	EventBus.quit_game_requested.emit()
-
-func _show_factory_menu() -> void:
-	show_menu(MENUS.FACTORY)
-	
-func _hide_factory_menu() -> void:
-	
-	factory_menu.hide_menu()
-	# we assume the top menu in sthe stack is the factory menu and drop it
-	menu_stack.pop_back()
