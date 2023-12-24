@@ -46,21 +46,17 @@ func _ready() -> void:
 		pause_menu.continue_button_pressed.connect(_on_pause_menu_continue_button_pressed)
 		pause_menu.options_button_pressed.connect(_on_any_options_button_pressed)
 		pause_menu.quit_to_menu_button_pressed.connect(_on_pause_menu_quit_to_menu_button_pressed)
-		
+	
+	EventBus.escape_key_pressed.connect(_on_escape_key_pressed)
+
 	_hide_menus()
-
-func _unhandled_input(event) -> void:
-	""" handle escape key presses for / in the menu """
-
-	if event is InputEventKey:
-		# handle escape key presses
-		if event.pressed and event.keycode == KEY_ESCAPE:
-			handle_escape_key()
-
 
 # ========
 # signal handler
 # ========
+
+func _on_escape_key_pressed() -> void:
+	_handle_escape_key()
 
 # ========
 # class functions
@@ -82,7 +78,7 @@ func show_menu(menu: int, hide_last_menu: bool = true) -> void:
 
 	menu_stack.append(new_menu.show_menu())
 
-func handle_escape_key() -> void:
+func _handle_escape_key() -> void:
 	"""handle escape key pressed"""
 
 	# if in main menu, send quit signal

@@ -56,7 +56,14 @@ func _ready() -> void:
 	EventBus.pause_game_requested.connect(_on_pause_game_requested)
 	EventBus.return_to_main_menu_requested.connect(_on_return_to_main_menu_requested)
 
+func _unhandled_input(event) -> void:
+	""" handle escape key presses """
 
+	if event is InputEventKey:
+		# handle escape key presses
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			EventBus.escape_key_pressed.emit()
+		
 # ========
 # signal handler
 # ========
