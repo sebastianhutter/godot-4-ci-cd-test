@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd0b3tlgewrpe"]
+
+[ext_resource type="PackedScene" uid="uid://devn2ns8rrr87" path="res://scenes/player/player.tscn" id="1_ueaw8"]
+[ext_resource type="PackedScene" uid="uid://brsyvjjq8ldrm" path="res://scenes/environment/platform/platform.tscn" id="2_ldpgu"]
+
+[node name="BasicPlayerMovement" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ueaw8")]
+position = Vector2(110, -394)
+scale = Vector2(1, 0.986797)
+
+[node name="Platform" parent="." instance=ExtResource("2_ldpgu")]
+position = Vector2(3, 14)
+
+[node name="Platform2" parent="." instance=ExtResource("2_ldpgu")]
+position = Vector2(1591, 365)
+is_small_platform = true
+
+[node name="Platform3" parent="." instance=ExtResource("2_ldpgu")]
+position = Vector2(1291, 42)
+
+[node name="Platform4" parent="." instance=ExtResource("2_ldpgu")]
+position = Vector2(870, 17)
+
+[node name="Platform5" parent="." instance=ExtResource("2_ldpgu")]
+position = Vector2(434, 3)
+is_broken_platform = true

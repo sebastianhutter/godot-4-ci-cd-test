@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://devn2ns8rrr87"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_sou63"]
+[ext_resource type="Texture2D" uid="uid://dmrnc0pdin2yh" path="res://assets/gfx/player/bunny1_ready.png" id="2_gc1sq"]
+[ext_resource type="Texture2D" uid="uid://dr8hf4jdfnncw" path="res://assets/gfx/player/bunny1_stand.png" id="3_f4ja7"]
+[ext_resource type="Texture2D" uid="uid://61dihi4nv11i" path="res://assets/gfx/player/bunny1_walk1.png" id="4_ureos"]
+[ext_resource type="Texture2D" uid="uid://l8245c47pwbs" path="res://assets/gfx/player/bunny1_walk2.png" id="5_2v737"]
+[ext_resource type="PackedScene" uid="uid://25l3gd58kvfo" path="res://scenes/components/finite_state_machine/finite_state_machine.tscn" id="6_2eimf"]
+[ext_resource type="PackedScene" uid="uid://b8bgwkabkse6r" path="res://scenes/components/finite_state_machine/player/player_fall.tscn" id="6_lmae4"]
+[ext_resource type="PackedScene" uid="uid://berjtvou5wb5x" path="res://scenes/components/finite_state_machine/player/player_idle.tscn" id="7_0nma6"]
+[ext_resource type="PackedScene" uid="uid://bpyvnfjfd7ptx" path="res://scenes/components/finite_state_machine/player/player_walk.tscn" id="8_p1xhp"]
+[ext_resource type="Texture2D" uid="uid://db22o8gl85k0d" path="res://assets/gfx/player/bunny1_jump.png" id="9_fmam4"]
+[ext_resource type="PackedScene" uid="uid://delr31r723jh" path="res://scenes/components/finite_state_machine/player/player_jump.tscn" id="9_wbcal"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqt7n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gc1sq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f4ja7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_fmam4")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ureos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2v737")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_engdb"]
+size = Vector2(98, 126)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_sou63")
+jump_velocity = -600.0
+allowed_jumps = 2
+
+[node name="FiniteStateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("6_2eimf")]
+unique_name_in_owner = true
+initial_state = NodePath("PlayerIdle")
+
+[node name="PlayerIdle" parent="FiniteStateMachine" node_paths=PackedStringArray("player") instance=ExtResource("7_0nma6")]
+player = NodePath("../..")
+
+[node name="PlayerWalk" parent="FiniteStateMachine" node_paths=PackedStringArray("player") instance=ExtResource("8_p1xhp")]
+player = NodePath("../..")
+
+[node name="PlayerJump" parent="FiniteStateMachine" node_paths=PackedStringArray("player") instance=ExtResource("9_wbcal")]
+player = NodePath("../..")
+
+[node name="PlayerFall" parent="FiniteStateMachine" node_paths=PackedStringArray("player") instance=ExtResource("6_lmae4")]
+player = NodePath("../..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_hqt7n")
+animation = &"jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 28)
+shape = SubResource("RectangleShape2D_engdb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
