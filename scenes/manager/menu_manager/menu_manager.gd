@@ -33,7 +33,15 @@ var menu_stack: Array[Menu] = []
 # godot functions
 # ========
 
-func _ready() -> void:
+# ========
+# signal handler
+# ========
+
+# ========
+# class functions
+# ========
+
+func _initialize_manager() -> void:
 	if main_menu:
 		main_menu.play_button_pressed.connect(_on_main_menu_play_button_pressed)
 		main_menu.options_button_pressed.connect(_on_any_options_button_pressed)
@@ -46,21 +54,8 @@ func _ready() -> void:
 		pause_menu.continue_button_pressed.connect(_on_pause_menu_continue_button_pressed)
 		pause_menu.options_button_pressed.connect(_on_any_options_button_pressed)
 		pause_menu.quit_to_menu_button_pressed.connect(_on_pause_menu_quit_to_menu_button_pressed)
-	
-	EventBus.escape_key_pressed.connect(_on_escape_key_pressed)
 
 	_hide_menus()
-
-# ========
-# signal handler
-# ========
-
-func _on_escape_key_pressed() -> void:
-	_handle_escape_key()
-
-# ========
-# class functions
-# ========
 
 func show_menu(menu: int, hide_last_menu: bool = true) -> void:
 	"""show the given menu"""

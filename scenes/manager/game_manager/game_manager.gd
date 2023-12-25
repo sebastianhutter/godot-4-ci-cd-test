@@ -62,7 +62,8 @@ func _unhandled_input(event) -> void:
 	if event is InputEventKey:
 		# handle escape key presses
 		if event.pressed and event.keycode == KEY_ESCAPE:
-			EventBus.escape_key_pressed.emit()
+			print('que')
+			get_tree().call_group("managers", "handle_escape_key")
 		
 # ========
 # signal handler

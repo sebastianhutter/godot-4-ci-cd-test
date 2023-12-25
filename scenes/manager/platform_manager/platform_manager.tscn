@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scenes/manager/platform_manager/platform_manager.gd" id="1_ea4lc"]
 
 [node name="PlatformManager" type="Node"]
+process_mode = 1
 script = ExtResource("1_ea4lc")

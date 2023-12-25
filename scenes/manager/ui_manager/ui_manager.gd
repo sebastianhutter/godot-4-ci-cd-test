@@ -25,9 +25,6 @@ class_name UiManager
 # godot functions
 # ========
 
-func _ready() -> void:
-	_hide_all_ui_elements() 
-
 # ========
 # signal handler
 # ========
@@ -35,6 +32,9 @@ func _ready() -> void:
 # ========
 # class functions
 # ========
+
+func _initialize_manager() -> void:
+	_hide_all_ui_elements() 
 
 func _transition_to_game_loop() -> void:
 	_show_all_ui_elements() 

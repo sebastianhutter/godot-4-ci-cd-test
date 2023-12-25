@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8ew1lrlsxjut" path="res://scenes/menu/pause_menu/pause_menu.tscn" id="4_cy0sj"]
 
 [node name="MenuManager" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_jmxq8")
 
 [node name="OptionsMenu" parent="." instance=ExtResource("2_qs7en")]
