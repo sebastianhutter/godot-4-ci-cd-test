@@ -55,6 +55,7 @@ jump={
 
 2d_physics/layer_1="floor"
 2d_physics/layer_2="player"
+2d_physics/layer_29="platform_spawn"
 
 [rendering]
 

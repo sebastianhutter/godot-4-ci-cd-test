@@ -66,3 +66,6 @@ func physics_update(delta):
 	if Input.is_action_just_pressed("jump"):
 		transition_to.emit(self, "PlayerJump")
 	
+	if not player.is_on_floor():
+		transition_to.emit(self, "PlayerFall")
+	

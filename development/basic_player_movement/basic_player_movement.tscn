@@ -12,18 +12,33 @@ jump_velocity = -400.0
 allowed_jumps = 3
 
 [node name="Platform" parent="." instance=ExtResource("2_ldpgu")]
-position = Vector2(3, 14)
+position = Vector2(19, 125)
+is_falling = false
+fall_speed = 250.0
 
 [node name="Platform2" parent="." instance=ExtResource("2_ldpgu")]
-position = Vector2(1591, 365)
+position = Vector2(1591, 100)
 is_small_platform = true
+is_falling = false
+fall_speed = 250.0
 
 [node name="Platform3" parent="." instance=ExtResource("2_ldpgu")]
-position = Vector2(1291, 42)
+position = Vector2(1229, 108)
+is_falling = false
+fall_speed = 250.0
 
 [node name="Platform4" parent="." instance=ExtResource("2_ldpgu")]
-position = Vector2(870, 17)
+position = Vector2(837, 117)
+is_falling = false
+fall_speed = 250.0
 
 [node name="Platform5" parent="." instance=ExtResource("2_ldpgu")]
-position = Vector2(434, 3)
+position = Vector2(434, 100)
 is_broken_platform = true
+is_falling = false
+fall_speed = 250.0
+
+[node name="Platform6" parent="." instance=ExtResource("2_ldpgu")]
+position = Vector2(0, 575)
+is_falling = false
+fall_speed = 250.0

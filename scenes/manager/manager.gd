@@ -27,7 +27,6 @@ class_name Manager
 
 func _ready() -> void:
 	add_to_group("managers")
-	_initialize_manager()
 
 # ========
 # signal handler
@@ -72,9 +71,4 @@ func _transition_to_pause() -> void:
 func _handle_escape_key() -> void:
 	# virtual func to override, is executed on all managers if the escape key is
 	# pressed
-	pass
-
-func _initialize_manager() -> void:
-	# use this one in the base manager class instead of the godot _ready
-	# function
 	pass

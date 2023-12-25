@@ -29,6 +29,13 @@ class_name Platform
 		_load_sprite_texture() if not Engine.is_editor_hint() else _load_sprite_texture_from_editor()
 		_enable_collision_polygon()
 
+@export var is_falling: bool = true:
+	set(val):
+		is_falling = val
+		set_physics_process(is_falling)
+
+@export var fall_speed: float = 250.0
+
 # ========
 # class signals
 # ========
@@ -45,14 +52,20 @@ class_name Platform
 # class vars
 # ========
 
+var velocity = Vector2.ZERO
+
 # ========
 # godot functions
 # ========
 
 func _ready() -> void:
-	print("is ready executed?")
 	_load_sprite_texture() if not Engine.is_editor_hint() else _load_sprite_texture_from_editor()
 	_enable_collision_polygon()
+	set_physics_process(is_falling) # if not Engine.is_editor_hint() else set_physics_process(false)
+	
+func _physics_process(_delta: float) -> void:
+	velocity.y = fall_speed * _delta
+	position += velocity
 
 # ========
 # signal handler
