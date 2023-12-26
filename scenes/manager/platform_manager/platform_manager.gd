@@ -10,15 +10,15 @@ class_name PlatformManager
 # ========
 
 @export_enum("cake", "grass", "sand", "snow", "stone", "wood") var starting_environment: String = "grass"
-@export var spawn_area_y_offset: int = -100: 
+@export var spawn_area_y_offset: int = 0: 
 	set(val):
 		spawn_area_y_offset = val
 		_set_spawning_area()
-@export var despawn_area_y_offset: int = 100:
+@export var despawn_area_y_offset: int = 250:
 	set(val):
 		despawn_area_y_offset = val
 		_set_despawning_area()
-@export var seconds_between_platform_spawns: float = 1.0
+@export var seconds_between_platform_spawns: float = 2.0
 
 
 # ========
@@ -129,7 +129,8 @@ func _transition_to_game_loop() -> void:
 	
 	if not platform_spawn_timer:
 		return 
-		
+	
+	_spawn_platform()
 	platform_spawn_timer.start(seconds_between_platform_spawns)
 
 func _transition_to_game_loop_from_pause_menu() -> void:
