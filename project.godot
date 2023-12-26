@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*res://library/autoload/event_bus.gd"
+Util="*res://library/autoload/util.gd"
 PlatformTextures="*res://library/autoload/platform_textures.gd"
 
 [display]

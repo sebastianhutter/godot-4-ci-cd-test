@@ -33,6 +33,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
+[node name="RestartButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_8virs")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Restart"
+
 [node name="OptionsButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_8virs")]
 unique_name_in_owner = true
 layout_mode = 2

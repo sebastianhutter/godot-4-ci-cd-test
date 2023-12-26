@@ -18,12 +18,14 @@ class_name PauseMenu
 signal continue_button_pressed
 signal options_button_pressed
 signal quit_to_menu_button_pressed
+signal restart_button_pressed
 
 # ========
 # class onready vars
 # ========
 
 @onready var continue_button: Button = $%ContinueButton
+@onready var restart_button: Button = $%RestartButton
 @onready var options_button: Button = $%OptionsButton
 @onready var quit_to_menu_button: Button = $%QuitToMenuButton
 
@@ -38,6 +40,7 @@ signal quit_to_menu_button_pressed
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	continue_button.pressed.connect(_on_continue_button_pressed)
+	restart_button.pressed.connect(_on_restart_button_pressed)
 	quit_to_menu_button.pressed.connect(_on_quit_to_menu_button_pressed)
 	options_button.pressed.connect(_on_options_button_pressed)
 
@@ -56,6 +59,10 @@ func _on_quit_to_menu_button_pressed() -> void:
 func _on_options_button_pressed() -> void:
 	"""emit the options pressed signal"""
 	options_button_pressed.emit()
+	
+func _on_restart_button_pressed() -> void:
+	"""emit the options pressed signal"""
+	restart_button_pressed.emit()
 
 # ========
 # class functions

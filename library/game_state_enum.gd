@@ -4,4 +4,5 @@ enum {
 	MENU,
 	GAME_LOOP,
 	PAUSE,
+	GAME_OVER,
 }

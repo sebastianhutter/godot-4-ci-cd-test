@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bno434q81ci1b" path="res://assets/gfx/environment/platforms/ground_grass.png" id="2_66mpf"]
 
 [node name="Platform" type="AnimatableBody2D" groups=["platform"]]
-position = Vector2(0, 63807.6)
+position = Vector2(0, 68597.9)
 collision_layer = 268435457
 collision_mask = 0
 script = ExtResource("1_h1064")

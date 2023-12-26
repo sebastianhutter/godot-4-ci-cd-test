@@ -4,4 +4,5 @@ enum {
 	MAIN,
 	OPTIONS,
 	PAUSE,
+	GAME_OVER,
 }

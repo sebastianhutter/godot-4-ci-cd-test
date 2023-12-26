@@ -157,7 +157,7 @@ func _set_spawning_area() -> void:
 		return
 		
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var player_pos: Vector2 = _get_player_position()
+	var player_pos: Vector2 = Util.get_player_position()
 	
 	# set the collision shape to fill the screen
 	platform_spawn_area.set_collision_shape_coordinates(
@@ -176,21 +176,10 @@ func _set_despawning_area() -> void:
 		return
 		
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var player_pos: Vector2 = _get_player_position()
+	var player_pos: Vector2 = Util.get_player_position()
 	
 	platform_despawn_area.set_collision_shape_coordinates(
 		Vector2(0, 0), Vector2(viewport_size.x, 0))
 	
 	platform_despawn_area.position = Vector2(0, 
 	player_pos.y+viewport_size.y+despawn_area_y_offset+player_pos.y)
-
-func _get_player_position() -> Vector2:
-	""" gets the current player position, used to ensure spawning areas are always
-	out of view """
-	
-	var player: Player = get_tree().get_first_node_in_group("player")
-	if not player:
-		return Vector2.ZERO
-	
-	return player.position
-	

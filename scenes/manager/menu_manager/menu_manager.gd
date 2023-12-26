@@ -21,6 +21,7 @@ class_name MenuManager
 @onready var main_menu: MainMenu = %MainMenu
 @onready var pause_menu: PauseMenu = %PauseMenu
 @onready var options_menu: OptionsMenu = %OptionsMenu
+@onready var game_over_menu: GameOverMenu = %GameOverMenu
 
 # ========
 # class vars
@@ -47,7 +48,12 @@ func _ready() -> void:
 	if pause_menu:
 		pause_menu.continue_button_pressed.connect(_on_pause_menu_continue_button_pressed)
 		pause_menu.options_button_pressed.connect(_on_any_options_button_pressed)
-		pause_menu.quit_to_menu_button_pressed.connect(_on_pause_menu_quit_to_menu_button_pressed)
+		pause_menu.quit_to_menu_button_pressed.connect(_on_any_to_menu_button_pressed)
+		pause_menu.restart_button_pressed.connect(_on_any_restart_button_pressed)
+
+	if game_over_menu:
+		game_over_menu.quit_to_menu_button_pressed.connect(_on_any_to_menu_button_pressed)
+		game_over_menu.restart_button_pressed.connect(_on_any_restart_button_pressed)
 
 	_hide_menus()
 
@@ -93,6 +99,8 @@ func _handle_escape_key() -> void:
 			_unpause_game()
 		options_menu:
 			_show_last_menu()
+		game_over_menu:
+			pass
 		# if either null or unknown menu we send pause!
 		_: 
 			_pause_game()
@@ -107,6 +115,8 @@ func _resolve_menu_enum(menu: int) -> Menu:
 			return options_menu
 		MENU.PAUSE:
 			return pause_menu
+		MENU.GAME_OVER:
+			return game_over_menu
 
 	return null
 
@@ -117,8 +127,6 @@ func _show_last_menu() -> void:
 		
 		current_menu.hide_menu()
 		menu_stack.append(new_menu.show_menu())
-
-
 
 func _on_any_back_button_pressed() -> void:
 	"""called when the back button is pressed in any menu"""
@@ -136,22 +144,26 @@ func _on_any_options_button_pressed() -> void:
 func _on_main_menu_play_button_pressed() -> void:
 	"""called when the play button is pressed on the main menu"""
 
-	EventBus.play_game_requested.emit()
+	play_game_requested.emit()
 
 func _on_main_menu_quit_button_pressed() -> void:
 	"""called when the quit button is pressed on the main menu"""
 
-	EventBus.quit_game_requested.emit()
-
-func _on_pause_menu_quit_to_menu_button_pressed() -> void:
-	"""called when the quit button is pressed on the pause menu"""
-
-	EventBus.return_to_main_menu_requested.emit()
+	quit_game_requested.emit()
 
 func _on_pause_menu_continue_button_pressed() -> void:
 	""" called when continue is pressed on the pause menu """
 	_unpause_game()
+
+func _on_any_to_menu_button_pressed() -> void:
+	"""called when the quit button is pressed in any game menu """
+
+	return_to_main_menu_requested.emit()
+
+func _on_any_restart_button_pressed() -> void:
+	""" called when the restart button is pressed in any game menu """
 	
+	restart_game_requested.emit()
 	
 func _transition_to_menu() -> void:
 	_hide_menus()
@@ -164,15 +176,21 @@ func _transition_to_game_loop() -> void:
 	# we assume that the top menu in the stack is either the main menu or the
 	# pause menu, while menus further down can be in game menus which have
 	# no influence on the game state
-
 	_hide_menus()
 	
 func _transition_to_pause() -> void:
 	show_menu(MENU.PAUSE, false)
-	
+
+func _transition_to_game_over() -> void:
+	print("transitioning menu manger to game over")
+	show_menu(MENU.GAME_OVER, true)
+
 func _hide_menus() -> void:
 	"""hide all game menus"""
 	for child in get_children():
+		if not child is Menu:
+			continue
+		
 		child.visible = false
 
 	menu_stack.clear()
@@ -186,10 +204,10 @@ func _unpause_game() -> void:
 		
 	pause_menu.hide_menu()
 	menu_stack.pop_back()
-	EventBus.play_game_requested.emit()
+	play_game_requested.emit()
 
 func _pause_game() -> void:
-	EventBus.pause_game_requested.emit()
+	pause_game_requested.emit()
 	
 func _quit_game() -> void:
-	EventBus.quit_game_requested.emit()
+	quit_game_requested.emit()

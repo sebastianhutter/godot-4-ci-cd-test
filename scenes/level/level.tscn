@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://ltwfejc66yfi"]
+
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_snkj0"]
+[ext_resource type="PackedScene" uid="uid://devn2ns8rrr87" path="res://scenes/player/player.tscn" id="2_to2jt"]
+[ext_resource type="PackedScene" uid="uid://do3m2j3o6w4ad" path="res://scenes/environment/player_camera/player_camera.tscn" id="2_vs4sr"]
+[ext_resource type="PackedScene" uid="uid://brsyvjjq8ldrm" path="res://scenes/environment/platform/platform.tscn" id="3_j83ry"]
+[ext_resource type="PackedScene" uid="uid://de574iosmsdho" path="res://scenes/group/group_platforms.tscn" id="4_4ul6t"]
+[ext_resource type="PackedScene" uid="uid://2q8kxgj50e27" path="res://scenes/environment/water/water.tscn" id="5_0coq6"]
+[ext_resource type="PackedScene" uid="uid://bbtvubvkislda" path="res://scenes/environment/invisible_wall/invisible_wall.tscn" id="6_cvp12"]
+
+[node name="Level" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_snkj0")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("2_vs4sr")]
+
+[node name="Player" parent="." instance=ExtResource("2_to2jt")]
+position = Vector2(481, 1139)
+
+[node name="Platform" parent="." instance=ExtResource("3_j83ry")]
+position = Vector2(480, 1293)
+is_falling = false
+
+[node name="GroupPlatforms" parent="." instance=ExtResource("4_4ul6t")]
+
+[node name="Water" parent="." instance=ExtResource("5_0coq6")]
+unique_name_in_owner = true
+position = Vector2(217, 1393)
+
+[node name="InvisibleWallLeft" parent="." instance=ExtResource("6_cvp12")]
+unique_name_in_owner = true
+position = Vector2(-8, 18)
+
+[node name="InvisibleWallRight" parent="." instance=ExtResource("6_cvp12")]
+unique_name_in_owner = true
+position = Vector2(970, 26)

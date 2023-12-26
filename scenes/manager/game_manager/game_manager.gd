@@ -17,6 +17,7 @@ class_name GameManager
 # class onready vars
 # ========
 
+
 # ========
 # class vars
 # ========
@@ -35,6 +36,9 @@ var current_game_state: int:
 			GAME_STATE.GAME_LOOP:
 				_transition_managers_to_game_loop()
 				get_tree().paused = false
+			GAME_STATE.GAME_OVER:
+				_transition_managers_to_game_over()
+				get_tree().paused = true
 			
 		current_game_state = val
 
@@ -50,11 +54,13 @@ func _ready() -> void:
 			continue
 
 		managers.append(child)
-
-	EventBus.quit_game_requested.connect(_on_quit_game_requested)
-	EventBus.play_game_requested.connect(_on_play_game_requested)
-	EventBus.pause_game_requested.connect(_on_pause_game_requested)
-	EventBus.return_to_main_menu_requested.connect(_on_return_to_main_menu_requested)
+		
+		child.quit_game_requested.connect(_on_quit_game_requested)
+		child.play_game_requested.connect(_on_play_game_requested)
+		child.pause_game_requested.connect(_on_pause_game_requested)
+		child.restart_game_requested.connect(_on_restart_game_requested)
+		child.return_to_main_menu_requested.connect(_on_return_to_main_menu_requested)
+		child.game_over_requested.connect(_on_game_over_requested)
 
 func _unhandled_input(event) -> void:
 	""" handle escape key presses """
@@ -62,7 +68,6 @@ func _unhandled_input(event) -> void:
 	if event is InputEventKey:
 		# handle escape key presses
 		if event.pressed and event.keycode == KEY_ESCAPE:
-			print('que')
 			get_tree().call_group("managers", "handle_escape_key")
 		
 # ========
@@ -88,6 +93,25 @@ func _on_return_to_main_menu_requested() -> void:
 		return
 		
 	current_game_state = GAME_STATE.MENU
+
+func _on_restart_game_requested() -> void:
+	
+	# we fake a restart by transitioning to main menu
+	# which removes all spawned resources
+	# and then immediately back to the game loop which recreates everything
+	
+	for manager in managers:
+		manager.transition_to_menu()
+	
+	for manager in managers:
+		manager.transition_to_game_loop(true)
+		
+	get_tree().paused = false
+	
+	
+func _on_game_over_requested() -> void:
+	print("signal arrived in game manager")
+	current_game_state = GAME_STATE.GAME_OVER
 
 # ========
 # class functions
@@ -118,7 +142,13 @@ func _transition_managers_to_menu() -> void:
 func _transition_managers_to_pause() -> void:
 	for manager in managers:
 		manager.transition_to_pause()
-		
+
+func _transition_managers_to_game_over() -> void:
+	print("transitioning managers to game over")
+	for manager in managers:
+		print(manager.name)
+		manager.transition_to_game_over()
+
 func _reset_managers() -> void:
 	for manager in managers:
 		manager.reset()

@@ -1,9 +1,5 @@
-extends Node
-class_name EventBusSingleton
-
-#
-# EVENT BUS IS NOT IN USE!
-#
+extends Manager
+class_name RoundManager
 
 # ========
 # singleton references
@@ -17,20 +13,9 @@ class_name EventBusSingleton
 # class signals
 # ========
 
-# game state signals
-signal play_game_requested()
-signal quit_game_requested()
-signal pause_game_requested()
-signal continue_game_requested()
-signal return_to_main_menu_requested()
-
-# player signals
-signal player_hit_water()
-
 # ========
 # class onready vars
 # ========
-
 
 # ========
 # class vars
@@ -39,6 +24,15 @@ signal player_hit_water()
 # ========
 # godot functions
 # ========
+
+func _ready():
+	pass
+
+func _process(_delta):
+	pass
+
+func _physics_process(_delta):
+	pass
 
 # ========
 # signal handler

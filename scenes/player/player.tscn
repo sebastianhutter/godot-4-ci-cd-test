@@ -49,7 +49,7 @@ animations = [{
 size = Vector2(98, 126)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_sou63")
 jump_velocity = -600.0
 allowed_jumps = 2
@@ -80,3 +80,4 @@ position = Vector2(3, 28)
 shape = SubResource("RectangleShape2D_engdb")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false

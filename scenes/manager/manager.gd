@@ -12,6 +12,12 @@ class_name Manager
 # ========
 # class signals
 # ========
+signal play_game_requested
+signal quit_game_requested
+signal pause_game_requested
+signal restart_game_requested
+signal return_to_main_menu_requested
+signal game_over_requested
 
 # ========
 # class onready vars
@@ -47,9 +53,11 @@ func transition_to_menu() -> void:
 	
 func transition_to_pause() -> void:
 	_transition_to_pause()
+	
+func transition_to_game_over() -> void:
+	_transition_to_game_over()
 
 func handle_escape_key() -> void:
-	print('mabager key')
 	_handle_escape_key()
 
 func _transition_to_game_loop() -> void:
@@ -65,7 +73,11 @@ func _transition_to_menu() -> void:
 	pass
 
 func _transition_to_pause() -> void:
-	# virtual func to override for pause menu, and win / loose menu
+	# virtual func to override for pause menu
+	pass
+
+func _transition_to_game_over() -> void:
+	# virtual func to override for game over screen
 	pass
 
 func _handle_escape_key() -> void:
