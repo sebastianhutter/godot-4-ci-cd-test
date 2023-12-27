@@ -16,7 +16,8 @@ unique_name_in_owner = true
 [node name="MenuManager" parent="GameManager" instance=ExtResource("3_86yw5")]
 unique_name_in_owner = true
 
-[node name="UiManager" parent="GameManager" instance=ExtResource("4_5qoiw")]
+[node name="UiManager" parent="GameManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("4_5qoiw")]
+level_manager = NodePath("../LevelManager")
 
 [node name="PlatformManager" parent="GameManager" instance=ExtResource("5_qbrt7")]
 

@@ -27,6 +27,8 @@ signal player_hit_water()
 # class vars
 # ========
 
+var player
+
 # ========
 # godot functions
 # ========

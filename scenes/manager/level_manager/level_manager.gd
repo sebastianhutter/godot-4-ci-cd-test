@@ -17,6 +17,7 @@ class_name LevelManager
 # of passing the signal from water -> level -> level manager -> round manager?
 signal player_hit_water
 
+signal level_spawned
 
 # ========
 # class onready vars
@@ -50,6 +51,12 @@ func _on_player_hit_water() -> void:
 # class functions
 # ========
 
+func get_player_height() -> float:
+	""" returns the height (y) of the player """
+	
+	var player_pos: Vector2 = Util.get_player_position()
+	return player_pos.y
+
 func _transition_to_game_loop() -> void:
 	""" spawn in the level """
 	
@@ -64,6 +71,7 @@ func _transition_to_game_loop() -> void:
 	get_parent().add_child(level_instance)
 	level_instance.player_hit_water.connect(_on_player_hit_water)
 	level_instance.raise_water()
+	level_spawned.emit()
 
 func _transition_to_game_loop_from_pause_menu() -> void:
 	# virtual func to overwrite for each manager to allow unpausing the game

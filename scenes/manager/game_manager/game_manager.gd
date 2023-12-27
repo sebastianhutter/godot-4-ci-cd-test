@@ -110,7 +110,6 @@ func _on_restart_game_requested() -> void:
 	
 	
 func _on_game_over_requested() -> void:
-	print("signal arrived in game manager")
 	current_game_state = GAME_STATE.GAME_OVER
 
 # ========
@@ -120,7 +119,6 @@ func _on_game_over_requested() -> void:
 func initiate_game(initial_game_state: int) -> void:
 	# called by the main scene in ready
 	
-
 	current_game_state = initial_game_state
 
 func _quit_game() -> void:
@@ -134,7 +132,7 @@ func _transition_managers_to_game_loop() -> void:
 	
 	for manager in managers:
 		manager.transition_to_game_loop(is_initial_game_loop)
-		
+	
 func _transition_managers_to_menu() -> void:
 	for manager in managers:
 		manager.transition_to_menu()
@@ -144,9 +142,7 @@ func _transition_managers_to_pause() -> void:
 		manager.transition_to_pause()
 
 func _transition_managers_to_game_over() -> void:
-	print("transitioning managers to game over")
 	for manager in managers:
-		print(manager.name)
 		manager.transition_to_game_over()
 
 func _reset_managers() -> void:

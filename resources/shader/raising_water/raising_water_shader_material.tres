@@ -1,17 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bbdgx5plhgpbw"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bbdgx5plhgpbw"]
 
 [ext_resource type="Shader" path="res://resources/shader/raising_water/raising_water.gdshader" id="1_s0yiq"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_bxgaj"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ocry4"]
-seamless = true
-noise = SubResource("FastNoiseLite_bxgaj")
-
 [resource]
 shader = ExtResource("1_s0yiq")
-shader_parameter/scale = Vector2(4.79163, 0.775391)
-shader_parameter/distortion_scale = Vector2(10, 10)
-shader_parameter/intensity = null
 shader_parameter/water_color = Color(0, 0.560784, 0.584314, 0.74902)
-shader_parameter/noise = SubResource("NoiseTexture2D_ocry4")

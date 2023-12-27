@@ -182,7 +182,6 @@ func _transition_to_pause() -> void:
 	show_menu(MENU.PAUSE, false)
 
 func _transition_to_game_over() -> void:
-	print("transitioning menu manger to game over")
 	show_menu(MENU.GAME_OVER, true)
 
 func _hide_menus() -> void:

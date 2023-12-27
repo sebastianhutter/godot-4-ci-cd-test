@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0xuj2fyubr35" path="res://scenes/ui/sound_button/sound_button.tscn" id="2_opf1n"]
 
 [node name="GameOverMenu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

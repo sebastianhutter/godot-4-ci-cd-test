@@ -15,7 +15,8 @@ script = ExtResource("1_snkj0")
 [node name="PlayerCamera" parent="." instance=ExtResource("2_vs4sr")]
 
 [node name="Player" parent="." instance=ExtResource("2_to2jt")]
-position = Vector2(481, 1139)
+position = Vector2(481, 1157)
+allowed_jumps = 999
 
 [node name="Platform" parent="." instance=ExtResource("3_j83ry")]
 position = Vector2(480, 1293)
