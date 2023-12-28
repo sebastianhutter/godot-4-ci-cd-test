@@ -3,6 +3,11 @@ on:
   pull_request:
     branches:
       - main
+# permissions are required for junit step
+permissions:
+    contents: read
+    checks: write
+    id-token: write
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -17,18 +22,15 @@ jobs:
         uses: ./.github/actions/linux/download-godot
         with:
           version: ${{ vars.GODOT_VERSION }}
-      - run: |
-          echo "Re-importing project"
+      - name: Re-import project files
+        run: |
           $GODOT_BIN --headless --editor --quit-after 60 .
-
-          ls -lah
-          git status
         env:
+          # retry importing for 60 cycles
           GODOT_BIN: "${{ steps.download.outputs.godot-bin }}"
-      - run: |
-          echo "Starting virtual display"
+      - name: Run tests
+        run: |
           sudo Xvfb -ac ${DISPLAY} -screen 0 1280x1024x24 > /dev/null &
-          echo "Running tests"
           bash addons/gdUnit4/runtest.sh --continue --add ./test
         env:
           GODOT_BIN: "${{ steps.download.outputs.godot-bin }} --rendering-driver opengl3"
