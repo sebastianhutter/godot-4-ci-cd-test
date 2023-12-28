@@ -39,6 +39,6 @@ runs:
     - id: binary
       shell: bash
       run: |
-        if [ -n "${{ steps.download-linux.outputs.godot-bin }}"]; then
+        if [ -n "${{ steps.download-linux.outputs.godot-bin }}" ]; then
           echo "godot-bin=${{ steps.download-linux.outputs.godot-bin }}" >> $GITHUB_OUTPUT
         fi
