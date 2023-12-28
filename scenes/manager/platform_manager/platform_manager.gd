@@ -21,8 +21,8 @@ class_name PlatformManager
 
 @export var seconds_between_platform_spawns: float = 2.0
 
-@export var min_distance_between_platform_spawns: float = 100.0
-@export var max_distance_between_platform_spawns: float = 1000.0
+@export var min_distance_between_platform_spawns: float = 350.0
+@export var max_distance_between_platform_spawns: float = 500.0
 
 # ========
 # class signals
@@ -42,7 +42,9 @@ class_name PlatformManager
 # ========
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var spawn_platforms: bool = false
 var last_spawning_position : float = 0.0
+var last_spawned_platform: Platform = null
 
 
 # ========
@@ -62,15 +64,13 @@ func _ready() -> void:
 	
 	_set_spawning_area()
 	_set_despawning_area()
-	
-	if platform_spawn_area:
-		last_spawning_position = platform_despawn_area.position.y
 
 func _physics_process(_delta: float) -> void:
 	_set_spawning_area()
 	_set_despawning_area()
 
-	# calculate 
+	if spawn_platforms and _check_distance_to_platform():
+		_spawn_platform()
 # ========
 # signal handler
 # ========
@@ -104,12 +104,13 @@ func _on_platform_despawn_body_entered(body: Node) -> void:
 
 func _spawn_platform() -> void:
 	
-	var platform: Platform = platform_scene.instantiate()
-	platform.platform_environment = starting_environment
+	last_spawned_platform = platform_scene.instantiate()
+	last_spawned_platform.platform_environment = starting_environment
 	
-	platform.position = _get_random_platform_spawn_position()
+	last_spawned_platform.position = _get_random_platform_spawn_position()
+	last_spawning_position = last_spawned_platform.position.y
 	
-	_get_spawn_group().add_child(platform)
+	_get_spawn_group().add_child(last_spawned_platform)
 
 func _get_random_platform_spawn_position() -> Vector2:
 	""" returns a random spawn position """ 
@@ -141,6 +142,7 @@ func _transition_to_game_loop() -> void:
 	
 	_spawn_platform()
 	platform_spawn_timer.start(seconds_between_platform_spawns)
+	spawn_platforms = true
 
 func _transition_to_game_loop_from_pause_menu() -> void:
 	# virtual func to overwrite for each manager to allow unpausing the game
@@ -193,3 +195,24 @@ func _set_despawning_area() -> void:
 	
 	platform_despawn_area.position = Vector2(0, 
 	player_pos.y+viewport_size.y+despawn_area_y_offset+player_pos.y)
+
+func _check_distance_to_platform() -> bool:
+	""" checks the distance to the last spawned platform and the spawner """
+	
+	if not platform_spawn_area:
+		return false
+	
+	if not last_spawned_platform:
+		return true 
+		
+	var distance_of_platform = abs(last_spawning_position - last_spawned_platform.position.y)
+	
+	if distance_of_platform < min_distance_between_platform_spawns:
+		return false
+		
+	if distance_of_platform > max_distance_between_platform_spawns:
+		return true
+		
+	# randomize spawning of platform in between the min and max distance
+	return bool(rng.randi() % 2)
+
