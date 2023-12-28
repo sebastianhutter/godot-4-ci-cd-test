@@ -22,7 +22,7 @@ runs:
       shell: pwsh
       run: |
         echo $Env:GODOT_VERSION
-        $zip = 
+        $zip = "Godot_v" + $Env:GODOT_VERSION + "-stable_win64.exe.zip"
         curl -LO https://github.com/godotengine/godot-builds/releases/download/$Env:GODOT_VERSION-stable/Godot_v$Env:GODOT_VERSION-stable_win64.exe.zip 
         unzip Godot_v$Env:GODOT_VERSION-stable_win64.exe.zip
         echo "godot-bin=$PWD/Godot_v$GODOT_VERSION-stable_win64/Godot_v$GODOT_VERSION-stable_win64.exe"
