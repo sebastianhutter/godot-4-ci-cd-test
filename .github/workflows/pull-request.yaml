@@ -1,0 +1,22 @@
+name: Run tests on pull request
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          curl -Lo https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          chmod +x Godot_v${GODOT_VERSION}-stable_linux.x86_64
+      
+
+#       - uses: actions/setup-python@v2
+#         with:
+#           python-version: 3.8
+#       - run: pip install -r requirements.txt
+#       - run: pytest
+# ```
