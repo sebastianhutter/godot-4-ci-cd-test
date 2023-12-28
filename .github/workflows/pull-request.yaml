@@ -11,11 +11,13 @@ jobs:
       - run: |
           echo ${GODOT_VERSION}
           echo $GODOT_VERSION
+          echo 
           curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
           ls -lah
           unzip Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
           chmod +x Godot_v$GODOT_VERSION-stable_linux.x86_64
-      
+        env:
+          GODOT_VERSION: ${{ vars.GODOT_VERSION }}
 
 #       - uses: actions/setup-python@v2
 #         with:
