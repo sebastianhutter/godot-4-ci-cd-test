@@ -21,8 +21,26 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: download
-      uses: ./.github/actions/${{ inputs.os }} /download-godot
+    - if: ${{ inputs.os == 'linux' }}
+      id: download-linux
+      uses: ./.github/actions/linux/download-godot
       with: 
         version: ${{ inputs.version }}
-  
+    - if: ${{ inputs.os == 'mac' }}
+      id: download-mac
+      uses: ./.github/actions/mac/download-godot
+      with: 
+        version: ${{ inputs.version }}
+    - if: ${{ inputs.os == 'windows' }}
+      id: download-windows
+      uses: ./.github/actions/windows/download-godot
+      with: 
+        version: ${{ inputs.version }}
+    - id: downlaoded
+      shell: bash
+      run: |
+        if [ "${OS}" == "linux"]; then echo "godot-bin=${{ steps.download-linux.outputs.godot-bin }}" >> $GITHUB_OUTPUT; fi
+        if [ "${OS}" == "mac"]; then echo "godot-bin=${{ steps.download-mac.outputs.godot-bin }}" >> $GITHUB_OUTPUT; fi
+        if [ "${OS}" == "windows"]; then echo "godot-bin=${{ steps.download-windows.outputs.godot-bin }}" >> $GITHUB_OUTPUT; fi
+      env:
+        OS: ${{ inputs.os }}
