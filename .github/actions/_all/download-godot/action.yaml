@@ -42,3 +42,9 @@ runs:
         if [ -n "${{ steps.download-linux.outputs.godot-bin }}" ]; then
           echo "godot-bin=${{ steps.download-linux.outputs.godot-bin }}" >> $GITHUB_OUTPUT
         fi
+        if [ -n "${{ steps.download-mac.outputs.godot-bin }}" ]; then
+          echo "godot-bin=${{ steps.download-mac.outputs.godot-bin }}" >> $GITHUB_OUTPUT
+        fi
+        if [ -n "${{ steps.download-windows.outputs.godot-bin }}" ]; then
+          echo "godot-bin=${{ steps.download-windows.outputs.godot-bin }}" >> $GITHUB_OUTPUT
+        fi
