@@ -11,9 +11,9 @@ inputs:
     required: true
     default: "4.2.1"
 outputs:
-  godot_bin:
+  godot-bin:
     description: "The path to the Godot binary"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
+    value: ${{ steps.download.outputs.godot-bin }}
 
 runs:
   using: "composite"
@@ -24,6 +24,6 @@ runs:
         curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
         unzip Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
         chmod +x Godot_v$GODOT_VERSION-stable_linux.x86_64
-        echo "GODOT_BIN=$PWD/Godot_v$GODOT_VERSION-stable_linux.x86_64" >> $GITHUB_OUTPUT
+        echo "godot-bin=$PWD/Godot_v$GODOT_VERSION-stable_linux.x86_64" >> $GITHUB_OUTPUT
       env:
         GODOT_VERSION: ${{ inputs.version }}

@@ -15,8 +15,8 @@ jobs:
           version: ${{ vars.GODOT_VERSION }}
       - run: |
           env
-          echo ${{ steps.download.outputs.godot_bin }}
+          echo ${{ steps.download.outputs.godot-bin }}
           ${{ env.GODOT_BIN }} --version
         env:
-          GODOT_BIN: ${{ steps.download.outputs.godot_bin }}
+          GODOT_BIN: ${{ steps.download.outputs.godot-bin }}
           GODOT_VERSION: ${{ vars.GODOT_VERSION }}
