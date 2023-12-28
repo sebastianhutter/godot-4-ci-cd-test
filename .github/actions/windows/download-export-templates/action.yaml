@@ -1,0 +1,33 @@
+#
+# downloads the godot export templates and adds it to the export templates folder
+#
+
+name: "Download Godot Export Template"
+description: "Downloads the Godot export templates and makes them available for the godot bin"
+inputs:
+  version:
+    description: "The version of Godot to download"
+    required: true
+    default: "4.2.1-stable"
+outputs: {}
+
+runs:
+  using: "composite"
+  steps:
+    - shell: pwsh
+      run: |
+        $tpz = "Godot_v" + $Env:GODOT_VERSION + "_export_templates.tpz"
+        $download_url = "https://github.com/godotengine/godot-builds/releases/download/" + $Env:GODOT_VERSION + "/" + $tpz
+        curl -L $download_url -o templates.zip
+        unzip templates.zip
+      env:
+        GODOT_VERSION: ${{ inputs.version }}
+    - shell: pwsh
+      run: |
+        template_directory=$Env:GODOT_VERSION.replace("-", ".")
+        templates_folder = Join-Path -Path $env:APPDATA Godot templates
+        New-Item $templates_folder -ItemType Directory -ea 0
+        Rename-Item -Path templates -NewName $template_directory
+        Move-Item -Path $template_directory -Destination $templates_folder
+      env:
+        GODOT_VERSION: ${{ inputs.version }}

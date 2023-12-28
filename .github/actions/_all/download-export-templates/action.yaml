@@ -23,13 +23,13 @@ runs:
       uses: ./.github/actions/linux/download-export-templates
       with: 
         version: ${{ inputs.version }}
-    # - if: ${{ inputs.os == 'mac' }}
-    #   id: download-mac
-    #   uses: ./.github/actions/mac/download-export-templates
-    #   with: 
-    #     version: ${{ inputs.version }}
-    # - if: ${{ inputs.os == 'windows' }}
-    #   id: download-windows
-    #   uses: ./.github/actions/windows/download-export-templates
-    #   with: 
-    #     version: ${{ inputs.version }}
+    - if: ${{ inputs.os == 'mac' }}
+      id: download-mac
+      uses: ./.github/actions/mac/download-export-templates
+      with: 
+        version: ${{ inputs.version }}
+    - if: ${{ inputs.os == 'windows' }}
+      id: download-windows
+      uses: ./.github/actions/windows/download-export-templates
+      with: 
+        version: ${{ inputs.version }}
