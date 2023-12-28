@@ -37,6 +37,6 @@ runs:
 
         curl -LO $download_url
         unzip $zip 
-        echo $output >> $GITHUB_OUTPUT
+        echo $output >> $Env:GITHUB_OUTPUT
       env:
         GODOT_VERSION: ${{ inputs.version }}
