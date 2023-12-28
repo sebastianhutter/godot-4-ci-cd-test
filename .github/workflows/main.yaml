@@ -35,14 +35,13 @@ jobs:
       matrix: ${{ fromJson(needs.configure-matrix.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 900
-    if: ${{ matrix.enabled }}
     steps:
-      - uses: actions/checkout@v2
-      # - id: download
-      #   name: download godot
-      #   uses: ./.github/actions/linux/download-godot
-      #   with:
-      #     version: ${{ vars.GODOT_VERSION }}
+      - uses: actions/checkout@v2      
+      - id: download
+        name: download godot
+        uses: ./.github/actions/${{ matrix.actions }}/download-godot
+        with:
+          version: ${{ vars.GODOT_VERSION }}
       # - name: run tests
       #   uses: ./.github/actions/linux/run-gdunit4
       #   with:

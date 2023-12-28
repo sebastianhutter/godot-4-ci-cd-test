@@ -1,23 +1,23 @@
 {
     "include": [
         {
-            "enabled": true,
             "export_preset": "linux",
+            "actions": "linux",
             "runner": "ubuntu-latest"
         },
         {
-            "enabled": true,
             "export_preset": "windows",
+            "actions": "windows",
             "runner": "windows-latest"
         },
         {
-            "enabled": true,
             "export_preset": "mac",
+            "actions": "mac",
             "runner": "macos-latest"
         },
         {
-            "enabled": false,
             "export_preset": "web",
+            "actions": "linux",
             "runner": "ubuntu-latest"
         }
     ]
