@@ -24,7 +24,7 @@ runs:
         $name = "Godot_v" + $Env:GODOT_VERSION + "-stable_win64"
         $zip = $name + ".exe.zip"
         $bin = $name + ".exe" 
-        $download_url = "https://github.com/godotengine/godot-builds/releases/download/" + $Env:GODOT_VERSION" + -stable/" + $zip
+        $download_url = "https://github.com/godotengine/godot-builds/releases/download/" + $Env:GODOT_VERSION + "-stable/" + $zip
         $local_full_path_to_bin = Join-Path -Path $PWD $name $bin
         $output = "godot-bin=" + $local_full_path_to_bin
        
