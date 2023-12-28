@@ -24,9 +24,9 @@ runs:
         GODOT_VERSION: ${{ inputs.version }}
     - shell: pwsh
       run: |
-        template_directory=$Env:GODOT_VERSION
-        template_directory=template_directory.replace("-", ".")
-        templates_folder = Join-Path -Path $env:APPDATA Godot templates
+        $template_directory = $Env:GODOT_VERSION
+        $template_directory = template_directory.replace("-", ".")
+        $templates_folder = Join-Path -Path $env:APPDATA Godot templates
         New-Item $templates_folder -ItemType Directory -ea 0
         Rename-Item -Path templates -NewName $template_directory
         Move-Item -Path $template_directory -Destination $templates_folder
