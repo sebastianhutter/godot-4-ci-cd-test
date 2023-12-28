@@ -1,26 +1,22 @@
-name: Run tests on pull request
+name: Run tests on pull request (on mac runners for reference!)
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-# permissions are required for junit step
 permissions:
     contents: read
     checks: write
     id-token: write
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - id: download
         name: download godot
-        uses: ./.github/actions/linux/download-godot
+        uses: ./.github/actions/mac/download-godot
         with:
           version: ${{ vars.GODOT_VERSION }}
       - name: run tests
-        uses: ./.github/actions/linux/run-gdunit4
+        uses: ./.github/actions/mac/run-gdunit4
         with:
           binary: ${{ steps.download.outputs.godot-bin }}
       - name: Publish Test Report

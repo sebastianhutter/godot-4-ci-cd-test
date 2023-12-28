@@ -1,0 +1,28 @@
+#
+# downloads the godot binary for linux
+# and exports the path to the binary as an environment variable
+#
+
+name: "Download Godot Binary"
+description: "Downloads the Godot binary for mac and exports the path to the binary as an environment variable"
+inputs:
+  version:
+    description: "The version of Godot to download"
+    required: true
+    default: "4.2.1"
+outputs:
+  godot-bin:
+    description: "The path to the Godot.app"
+    value: ${{ steps.download.outputs.godot-bin }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: download
+      shell: bash
+      run: |
+        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_macos.universal.zip
+        unzip Godot_v$GODOT_VERSION-stable_macos.universal.zip
+        echo "godot-bin=$PWD/Godot.app" >> $GITHUB_OUTPUT
+      env:
+        GODOT_VERSION: ${{ inputs.version }}
