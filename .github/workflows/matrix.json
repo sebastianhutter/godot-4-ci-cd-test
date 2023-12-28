@@ -2,22 +2,22 @@
     "include": [
         {
             "export_preset": "linux",
-            "actions": "linux",
+            "actions_folder": "linux",
             "runner": "ubuntu-latest"
         },
         {
             "export_preset": "windows",
-            "actions": "windows",
+            "actions_folder": "windows",
             "runner": "windows-latest"
         },
         {
             "export_preset": "mac",
-            "actions": "mac",
+            "actions_folder": "mac",
             "runner": "macos-latest"
         },
         {
             "export_preset": "web",
-            "actions": "linux",
+            "actions_folder": "linux",
             "runner": "ubuntu-latest"
         }
     ]
