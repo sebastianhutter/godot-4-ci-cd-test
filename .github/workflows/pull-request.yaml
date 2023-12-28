@@ -9,9 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          curl -LO https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
-          unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
-          chmod +x Godot_v${GODOT_VERSION}-stable_linux.x86_64
+          curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
+          ls -lah
+          unzip Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
+          chmod +x Godot_v$GODOT_VERSION-stable_linux.x86_64
       
 
 #       - uses: actions/setup-python@v2
