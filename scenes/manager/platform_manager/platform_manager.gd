@@ -18,8 +18,11 @@ class_name PlatformManager
 	set(val):
 		despawn_area_y_offset = val
 		_set_despawning_area()
+
 @export var seconds_between_platform_spawns: float = 2.0
 
+@export var min_distance_between_platform_spawns: float = 100.0
+@export var max_distance_between_platform_spawns: float = 1000.0
 
 # ========
 # class signals
@@ -39,6 +42,8 @@ class_name PlatformManager
 # ========
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var last_spawning_position : float = 0.0
+
 
 # ========
 # godot functions
@@ -57,11 +62,15 @@ func _ready() -> void:
 	
 	_set_spawning_area()
 	_set_despawning_area()
+	
+	if platform_spawn_area:
+		last_spawning_position = platform_despawn_area.position.y
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_set_spawning_area()
 	_set_despawning_area()
 
+	# calculate 
 # ========
 # signal handler
 # ========
@@ -78,7 +87,7 @@ func _on_platform_spawn_timer_timeout() -> void:
 	if not platform_spawn_area:
 		return
 	
-	_spawn_platform()
+	#_spawn_platform()
 	platform_spawn_timer.start(seconds_between_platform_spawns)
 
 func _on_platform_despawn_body_entered(body: Node) -> void:

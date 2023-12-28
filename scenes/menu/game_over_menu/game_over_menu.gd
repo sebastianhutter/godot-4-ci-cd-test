@@ -52,3 +52,18 @@ func _on_quit_to_menu_button_pressed() -> void:
 # class functions
 # ========
 
+func _on_show(payload: Dictionary) -> void:
+	""" sets the game over text with the meters received from the ui """
+	
+	if not payload.has("meters"):
+		return
+	
+	_set_game_over_text(payload.meters)
+
+func _set_game_over_text(meters: int) -> void:
+	""" sets the game over text with the reached height """
+	
+	if not label:
+		return
+		
+	label.text = "Game Over\n\nYou have climbed %03d meters!" % meters

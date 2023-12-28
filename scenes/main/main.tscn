@@ -13,8 +13,9 @@ script = ExtResource("1_2eu20")
 [node name="GameManager" parent="." instance=ExtResource("2_do8sr")]
 unique_name_in_owner = true
 
-[node name="MenuManager" parent="GameManager" instance=ExtResource("3_86yw5")]
+[node name="MenuManager" parent="GameManager" node_paths=PackedStringArray("ui_manager") instance=ExtResource("3_86yw5")]
 unique_name_in_owner = true
+ui_manager = NodePath("../UiManager")
 
 [node name="UiManager" parent="GameManager" node_paths=PackedStringArray("level_manager") instance=ExtResource("4_5qoiw")]
 level_manager = NodePath("../LevelManager")

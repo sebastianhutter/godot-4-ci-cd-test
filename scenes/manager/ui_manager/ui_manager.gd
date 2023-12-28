@@ -77,4 +77,15 @@ func _show_all_ui_elements() -> void:
 	for child in get_children():
 		child.show()
 
+func get_height_from_ui() -> int:
+	""" gets the height from the ui menu """
+	
+	# the height should be stored in a manager or singleton and not just the ui
+	# but good enough for the mini game loop (goal is to test build 
+	# pipelines and not to write a game after all)
+	
+	for child in get_children():
+		if child.has_method("get_height"):
+			return child.get_height()
 
+	return 0

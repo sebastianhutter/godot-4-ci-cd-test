@@ -10,6 +10,8 @@ class_name MenuManager
 # export vars
 # ========
 
+@export var ui_manager: UiManager
+
 # ========
 # class signals
 # ========
@@ -65,7 +67,7 @@ func _ready() -> void:
 # class functions
 # ========
 
-func show_menu(menu: int, hide_last_menu: bool = true) -> void:
+func show_menu(menu: int, hide_last_menu: bool = true, payload: Dictionary = {}) -> void:
 	"""show the given menu"""
 
 	# use the enum to define the menu to load 
@@ -79,7 +81,7 @@ func show_menu(menu: int, hide_last_menu: bool = true) -> void:
 		if current_menu != null and hide_last_menu:
 			current_menu.hide_menu()
 
-	menu_stack.append(new_menu.show_menu())
+	menu_stack.append(new_menu.show_menu(payload))
 
 func _handle_escape_key() -> void:
 	"""handle escape key pressed"""
@@ -182,7 +184,12 @@ func _transition_to_pause() -> void:
 	show_menu(MENU.PAUSE, false)
 
 func _transition_to_game_over() -> void:
-	show_menu(MENU.GAME_OVER, true)
+	
+	var height: int = 0
+	if ui_manager:
+		height = ui_manager.get_height_from_ui()
+	
+	show_menu(MENU.GAME_OVER, true, {meters = height})
 
 func _hide_menus() -> void:
 	"""hide all game menus"""

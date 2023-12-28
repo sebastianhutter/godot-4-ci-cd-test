@@ -74,7 +74,7 @@ func _on_volume_slider_changed(value: float, bus: String) -> void:
 # class functions
 # ========
 
-func on_show() -> void: 
+func _on_show(payload: Dictionary) -> void: 
 	update_options_display()
 
 func update_options_display() -> void:

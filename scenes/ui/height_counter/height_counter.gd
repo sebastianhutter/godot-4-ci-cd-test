@@ -27,9 +27,12 @@ class_name HeightCounter
 
 var is_counting: bool = false
 var starting_height: float  = 0.0
+var height_converted_to_meters: int = 0
 var max_height: float = 0.0:
 	set(val):
 		max_height = val
+		if abs(max_height) > 0.0:
+			height_converted_to_meters = abs(max_height)/height_to_meters
 		_update_height_Label()
 
 # ========
@@ -69,6 +72,9 @@ func reset() -> void:
 	starting_height = 0.0
 	max_height = 0.0
 
+func get_height() -> int:
+	return height_converted_to_meters
+
 func start_height_counter() -> void:
 	
 	# ugly hack to ensure the player is properly positioned
@@ -84,10 +90,5 @@ func start_height_counter() -> void:
 func _update_height_Label() -> void:
 	if not height_label:
 		return
-	
-	var calculated_meters: float = 0.0
-	
-	if abs(max_height) > 0.0:
-		calculated_meters = abs(max_height)/height_to_meters
 
-	height_label.text = "Height Reached: %03dm" % calculated_meters
+	height_label.text = "Height Reached: %03dm" % height_converted_to_meters

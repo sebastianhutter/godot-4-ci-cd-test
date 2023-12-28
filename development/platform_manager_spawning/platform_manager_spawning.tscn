@@ -19,7 +19,6 @@ spawn_area_y_offset = -250
 [node name="Player" parent="." instance=ExtResource("4_ojrky")]
 position = Vector2(-291, 1225)
 speed = 500.0
-jump_velocity = -900.0
 allowed_jumps = 5
 
 [node name="Platform" parent="." instance=ExtResource("5_b0rso")]

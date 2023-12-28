@@ -33,10 +33,10 @@ class_name Menu
 # class functions
 # ========
 
-func show_menu() -> Menu:
+func show_menu(payload: Dictionary = {}) -> Menu:
 	"""show the current menu"""
 	self.show()
-	self._on_show()
+	self._on_show(payload)
 	return self
 
 func hide_menu() -> void:
@@ -48,6 +48,6 @@ func _on_hide() -> void:
 	""" virtual function to extend with additional steps when a menu is hidden """
 	pass
 
-func _on_show() -> void:
+func _on_show(payload: Dictionary) -> void:
 	""" virtual function to extend with additional steps when a menu is displayed """
 	pass
