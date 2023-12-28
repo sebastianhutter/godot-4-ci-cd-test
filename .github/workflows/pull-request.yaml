@@ -19,7 +19,7 @@ jobs:
           version: ${{ vars.GODOT_VERSION }}
       - run: |
           echo "Re-importing project"
-          $GODOT_BIN --headless --editor --quit-after 5 .
+          $GODOT_BIN --headless --editor --quit-after 60 .
 
           ls -lah
           git status
