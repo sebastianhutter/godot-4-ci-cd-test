@@ -1,6 +1,5 @@
 #
-# downloads the godot binary for linux
-# and exports the path to the binary as an environment variable
+# downloads the godot binary
 #
 
 name: "Download Godot Binary"
@@ -19,16 +18,11 @@ outputs:
     description: "The path to the Godot binary"
     value: ${{ steps.download.outputs.godot-bin }}
 
-
 runs:
   using: "composite"
   steps:
     - id: download
-      shell: bash
-      run: |
-        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
-        unzip Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
-        chmod +x Godot_v$GODOT_VERSION-stable_linux.x86_64
-        echo "godot-bin=$PWD/Godot_v$GODOT_VERSION-stable_linux.x86_64" >> $GITHUB_OUTPUT
-      env:
-        GODOT_VERSION: ${{ inputs.version }}
+      uses: ./.github/actions/${{ inputs.os }} /download-godot
+      with: 
+        version: ${{ inputs.version }}
+  

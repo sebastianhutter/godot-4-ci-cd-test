@@ -19,15 +19,6 @@ jobs:
       - uses: actions/checkout@v2
       - id: load-matrix
         run: echo "json=$(jq -c . < .github/workflows/matrix.json)" >> $GITHUB_OUTPUT
-  debug:
-    needs: configure-matrix
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: echo "${{ needs.configure-matrix.outputs.matrix }}"
-      - name: Print matrix
-        run: echo "${{ fromJson(needs.configure-matrix.outputs.matrix) }}"
-      
   build:
     needs: configure-matrix
     strategy:
@@ -43,6 +34,8 @@ jobs:
         with:
           os: ${{ matrix.os }}
           version: ${{ vars.GODOT_VERSION }}
+      - name: echo download bin
+        run: echo ${{ steps.download.outputs.godot-bin }}
       # - name: run tests
       #   uses: ./.github/actions/linux/run-gdunit4
       #   with:
