@@ -2,9 +2,7 @@ name: Run tests on pull request (on windows runners for reference!)
 on:
   workflow_dispatch:
 permissions:
-    contents: read
     checks: write
-    id-token: write
 jobs:
   test:
     runs-on: windows-latest
@@ -24,3 +22,4 @@ jobs:
         if: success() || failure() # always run even if the previous step fails
         with:
           report_paths: '**/reports/report_1/**/results.xml'
+          require_tests: true
