@@ -22,6 +22,6 @@ runs:
     - name: Run tests
       shell: bash
       run: |
-        bash addons/gdUnit4/runtest.sh --continue --add ./test
+        addons/gdUnit4/runtest.cmd --continue --add ./test
       env:
         GODOT_BIN: "${{ inputs.binary }}"
