@@ -14,15 +14,23 @@ jobs:
   configure-matrix:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.load-matrix.outputs.matrix }}
+      matrix: ${{ steps.load-matrix.outputs.json }}
     steps:
       - uses: actions/checkout@v2
       - id: load-matrix
-        run: echo "matrix=$(jq -c . < .github/workflows/matrix.json)" >> $GITHUB_OUTPUT
+        run: echo "json=$(jq -c . < .github/workflows/matrix.json)" >> $GITHUB_OUTPUT
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "${{ needs.configure-matrix.outputs.matrix }}"
+      - name: Print matrix
+        run: echo "${{ fromJson(needs.configure-matrix.outputs.matrix) }}"
+      
   build:
     strategy:
       fail-fast: true
-      matrix: ${{fromJson(needs.configure-matrix.outputs.matrix)}}
+      matrix: ${{ fromJson(needs.configure-matrix.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 900
     if: ${{ matrix.enabled }}
