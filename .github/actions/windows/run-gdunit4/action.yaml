@@ -19,9 +19,9 @@ runs:
         Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --editor --quit-after 60 ." -Wait
       env:
         GODOT_BIN: "${{ inputs.binary }}"
-    # - name: Run tests
-    #   shell: pwsh
-    #   run: |
-    #     & addons/gdUnit4/runtest.cmd --continue --add test
-    #   env:
-    #     GODOT_BIN: "${{ inputs.binary }}"
+    - name: Run tests
+      shell: pwsh
+      run: |
+        Start-Process -FilePath "addons/gdUnit4/runtest.cmd" -ArgumentList "--continue --add test" -Wait
+      env:
+        GODOT_BIN: "${{ inputs.binary }}"
