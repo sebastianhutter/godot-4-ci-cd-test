@@ -35,7 +35,7 @@ jobs:
       matrix: ${{ fromJson(needs.configure-matrix.outputs.matrix) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 900
-    #if: ${{ matrix.enabled }}
+    if: ${{ matrix.enabled }}
     steps:
       - uses: actions/checkout@v2
       # - id: download
