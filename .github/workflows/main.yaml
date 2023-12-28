@@ -34,6 +34,12 @@ jobs:
         with:
           os: ${{ matrix.os }}
           version: ${{ vars.GODOT_VERSION }}
+      - name: download export templates
+        uses: ./.github/actions/_all/download-export-templates
+        with:
+          os: ${{ matrix.os }}
+          version: ${{ vars.GODOT_VERSION }}
+
       - name: echo download bin
         run: echo ${{ steps.download.outputs.godot-bin }}
       # - name: run tests

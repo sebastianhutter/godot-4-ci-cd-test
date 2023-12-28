@@ -1,0 +1,35 @@
+#
+# downloads the godot binary
+#
+
+name: "Download Godot Export Templates"
+description: "Downloads the godot binary for the given os and and godot verison"
+inputs:
+  version:
+    description: "The version of Godot to download"
+    required: true
+    default: "4.2.1-stable"
+  os:
+    description: "The os to download the binary for"
+    required: true
+    default: "linux"
+outputs: {}
+
+runs:
+  using: "composite"
+  steps:
+    - if: ${{ inputs.os == 'linux' }}
+      id: download-linux
+      uses: ./.github/actions/linux/download-export-templates
+      with: 
+        version: ${{ inputs.version }}
+    # - if: ${{ inputs.os == 'mac' }}
+    #   id: download-mac
+    #   uses: ./.github/actions/mac/download-export-templates
+    #   with: 
+    #     version: ${{ inputs.version }}
+    # - if: ${{ inputs.os == 'windows' }}
+    #   id: download-windows
+    #   uses: ./.github/actions/windows/download-export-templates
+    #   with: 
+    #     version: ${{ inputs.version }}
