@@ -15,8 +15,9 @@ runs:
   steps:
     - name: Re-import project files
       shell: pwsh
+      # windows runners seem to require more retries for proper scanning
       run: |
-        Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --editor --quit-after 60 ." -Wait
+        Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --editor --quit-after 120 ." -Wait
       env:
         GODOT_BIN: "${{ inputs.binary }}"
     - name: Run tests
@@ -24,4 +25,4 @@ runs:
       run: |
         Start-Process -FilePath "addons/gdUnit4/runtest.cmd" -ArgumentList "--continue --add test" -Wait
       env:
-        GODOT_BIN: "${{ inputs.binary }}"
+        GODOT_BIN: "${{ inputs.binary }} --rendering-driver opengl3"
