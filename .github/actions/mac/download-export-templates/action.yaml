@@ -23,11 +23,5 @@ runs:
     - shell: bash
       run: |
         template_directory=${GODOT_VERSION//-/.}
-        echo "${HOME}/.local/share/godot/templates/${template_directory}"
-        mkdir -p "${HOME}/.local/share/godot/templates/${template_directory}"
-        mv templates/* "${HOME}/.local/share/godot/templates/${template_directory}/"
-
-    # Windows: %APPDATA%\Godot\templates\<version>\
-    # Linux: $HOME/.local/share/godot/templates/<version>/
-    # macOS: $HOME/Library/Application Support/Godot/templates/<version>/
-
+        mkdir -p "${HOME}/Library/Application Support/Godot/templates/${template_directory}"
+        mv templates/* "${HOME}/Library/Application Support/Godot/templates/${template_directory}/"

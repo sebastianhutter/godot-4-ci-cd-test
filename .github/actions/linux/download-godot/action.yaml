@@ -21,10 +21,6 @@ runs:
     - id: download
       shell: bash
       run: |
-        echo "================="
-        echo $GODOT_VERSION
-        echo "================="
-
         curl -LO https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip
         unzip Godot_v${GODOT_VERSION}_linux.x86_64.zip
         chmod +x Godot_v${GODOT_VERSION}_linux.x86_64
