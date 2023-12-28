@@ -16,13 +16,7 @@ runs:
     - name: Re-import project files
       shell: pwsh
       run: |
-        pwd
-        dir
-        dir Godot_v4.2.1-stable_win64.exe
-
-        $cli = $Env:GODOT_BIN + " --headless --editor --quit-after 60 ."
-        echo $cli
-        $cli
+        Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --editor --quit-after 60 ." -Wait
       env:
         GODOT_BIN: "${{ inputs.binary }}"
     # - name: Run tests
