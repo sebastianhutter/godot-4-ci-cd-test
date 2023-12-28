@@ -19,10 +19,11 @@ runs:
   using: "composite"
   steps:
     - id: download
-      shell: bash
+      shell: pwsh
       run: |
         curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_win64.exe.zip 
         unzip Godot_v$GODOT_VERSION-stable_win64.exe.zip
+        echo "godot-bin=$PWD/Godot_v$GODOT_VERSION-stable_win64/Godot_v$GODOT_VERSION-stable_win64.exe"
         echo "godot-bin=$PWD/Godot_v$GODOT_VERSION-stable_win64/Godot_v$GODOT_VERSION-stable_win64.exe" >> $GITHUB_OUTPUT
       env:
         GODOT_VERSION: ${{ inputs.version }}
