@@ -4,9 +4,11 @@ on:
   pull_request:
     branches:
       - main
-# permissions are required for junit step
+# check write permissions are required for junit step
 permissions:
+    contents: read
     checks: write
+    id-token: read
 jobs:
   test:
     runs-on: ubuntu-latest
