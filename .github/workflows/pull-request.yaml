@@ -13,28 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: install requirements
-        run: |
-          sudo apt-get update > /dev/null
-          sudo apt-get install -y xvfb > /dev/null
       - id: download
         name: download godot
         uses: ./.github/actions/linux/download-godot
         with:
           version: ${{ vars.GODOT_VERSION }}
-      - name: Re-import project files
-        run: |
-          $GODOT_BIN --headless --editor --quit-after 60 .
-        env:
-          # retry importing for 60 cycles
-          GODOT_BIN: "${{ steps.download.outputs.godot-bin }}"
-      - name: Run tests
-        run: |
-          sudo Xvfb -ac ${DISPLAY} -screen 0 1280x1024x24 > /dev/null &
-          bash addons/gdUnit4/runtest.sh --continue --add ./test
-        env:
-          GODOT_BIN: "${{ steps.download.outputs.godot-bin }} --rendering-driver opengl3"
-          DISPLAY: ":99"
+      - name: run tests
+        uses: ./.github/actions/linux/run-gdunit4
+        with:
+          binary: ${{ steps.download.outputs.godot-bin }}
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: success() || failure() # always run even if the previous step fails
