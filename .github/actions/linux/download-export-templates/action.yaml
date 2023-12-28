@@ -16,7 +16,7 @@ runs:
   steps:
     - shell: bash
       run: |
-        curl -L https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_${GODOT_VERSION}_export_templates.tpz -o templates.zip
+        curl -L https://github.com/godotengine/godot-builds/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz -o templates.zip
         unzip templates.zip
         ls -lah
       env:
