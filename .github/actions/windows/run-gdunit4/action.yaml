@@ -14,14 +14,14 @@ runs:
   using: "composite"
   steps:
     - name: Re-import project files
-      shell: bash
+      shell: pwsh
       run: |
-        $GODOT_BIN --headless --editor --quit-after 60 . || true
+        $GODOT_BIN --headless --editor --quit-after 60 .
       env:
         GODOT_BIN: "${{ inputs.binary }}"
     - name: Run tests
-      shell: bash
+      shell: pwsh
       run: |
-        addons/gdUnit4/runtest.cmd --continue --add ./test
+        addons/gdUnit4/runtest.cmd --continue --add test
       env:
         GODOT_BIN: "${{ inputs.binary }}"
