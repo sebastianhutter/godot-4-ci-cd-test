@@ -8,9 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: download godot
+      - id: download
+        name: download godot
         uses: ./.github/actions/linux/download-godot
+        with:
+          version: ${{ vars.GODOT_VERSION }}
       - run: |
           env
+          echo ${{ steps.download.outputs.godot_bin }}
           ${{ env.GODOT_BIN }} --version
-      
+        env:
+          GODOT_BIN: ${{ steps.download.outputs.godot_bin }}
+          GODOT_VERSION: ${{ vars.GODOT_VERSION }}

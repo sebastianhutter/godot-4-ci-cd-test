@@ -20,7 +20,7 @@ The repository contains three different workflows
 For the workflows to work you need to define the following action variables and action secrets
 
 ***Variables***
-- GODOT_VERSION: v4.2.1
+- GODOT_VERSION: 4.2.1
 
 ***Secrets**
 
