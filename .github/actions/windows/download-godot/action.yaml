@@ -27,13 +27,6 @@ runs:
         $download_url = "https://github.com/godotengine/godot-builds/releases/download/" + $Env:GODOT_VERSION + "-stable/" + $zip
         $local_full_path_to_bin = Join-Path -Path $PWD $name $bin
         $output = "godot-bin=" + $local_full_path_to_bin
-       
-        echo $name
-        echo $zip
-        echo $bin
-        echo $download_url
-        echo $local_full_path_to_bin
-        echo $output
 
         curl -LO $download_url
         unzip $zip 
