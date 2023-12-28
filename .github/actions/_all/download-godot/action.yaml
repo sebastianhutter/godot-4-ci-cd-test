@@ -39,8 +39,8 @@ runs:
     - id: downlaoded
       shell: bash
       run: |
-        if [ "${OS}" == "linux"]; then echo "godot-bin=${{ steps.download-linux.outputs.godot-bin }}" >> $GITHUB_OUTPUT; fi
-        if [ "${OS}" == "mac"]; then echo "godot-bin=${{ steps.download-mac.outputs.godot-bin }}" >> $GITHUB_OUTPUT; fi
-        if [ "${OS}" == "windows"]; then echo "godot-bin=${{ steps.download-windows.outputs.godot-bin }}" >> $GITHUB_OUTPUT; fi
+        [ "${OS}" == "linux" ] && echo "godot-bin=${{ steps.download-linux.outputs.godot-bin }}" >> $GITHUB_OUTPUT
+        [ "${OS}" == "mac" ] &&  echo "godot-bin=${{ steps.download-mac.outputs.godot-bin }}" >> $GITHUB_OUTPUT
+        [ "${OS}" == "windows" ] && then echo "godot-bin=${{ steps.download-windows.outputs.godot-bin }}" >> $GITHUB_OUTPUT
       env:
         OS: ${{ inputs.os }}
