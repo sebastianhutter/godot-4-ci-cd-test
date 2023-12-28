@@ -1,0 +1,20 @@
+{
+    "include": [
+        {
+            "export_preset": "linux",
+            "runner": "ubuntu-latest"
+        },
+        {
+            "export_preset": "windows",
+            "runner": "windows-latest"
+        },
+        {
+            "export_preset": "mac",
+            "runner": "macos-latest"
+        },
+        {
+            "export_preset": "web",
+            "runner": "ubuntu-latest"
+        }
+    ]
+}
