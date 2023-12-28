@@ -21,7 +21,7 @@ runs:
     - name: Re-import project files
       shell: bash
       run: |
-        $GODOT_BIN --headless --editor --quit-after 60 .
+        $GODOT_BIN --headless --editor --quit-after 60 . || true
       env:
         GODOT_BIN: "${{ inputs.binary }}/Contents/MacOS/Godot"
     - name: Run tests
