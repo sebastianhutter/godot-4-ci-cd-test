@@ -17,8 +17,14 @@ runs:
     - id: download
       shell: bash
       run: |
-        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION/Godot_$GODOT_VERSION-stable_export_templates.tpz
-        unzip Godot_$GODOT_VERSION-stable_export_templates.tpz
+        curl -L https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION/Godot_$GODOT_VERSION-stable_export_templates.tpz -o templates.zip
+        unzip templates.zip
         ls -lah
       env:
         GODOT_VERSION: ${{ inputs.version }}
+
+
+    # Windows: %APPDATA%\Godot\templates\<version>\
+    # Linux: $HOME/.local/share/godot/templates/<version>/
+    # macOS: $HOME/Library/Application Support/Godot/templates/<version>/
+
