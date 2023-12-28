@@ -13,11 +13,6 @@ outputs: {} # no outputs
 runs:
   using: "composite"
   steps:
-    # - name: install requirements
-    #   shell: bash
-    #   run: |
-    #     sudo apt-get update > /dev/null
-    #     sudo apt-get install -y xvfb > /dev/null
     - name: Re-import project files
       shell: bash
       run: |
@@ -27,9 +22,6 @@ runs:
     - name: Run tests
       shell: bash
       run: |
-        #sudo Xvfb -ac ${DISPLAY} -screen 0 1280x1024x24 > /dev/null &
         bash addons/gdUnit4/runtest.sh --continue --add ./test
       env:
-        #GODOT_BIN: "${{ inputs.binary }} --rendering-driver opengl3"
-        #DISPLAY: ":99"
         GODOT_BIN: "${{ inputs.binary }}/Contents/MacOS/Godot"
