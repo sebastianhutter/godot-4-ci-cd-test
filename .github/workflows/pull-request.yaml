@@ -14,9 +14,6 @@ jobs:
         with:
           version: ${{ vars.GODOT_VERSION }}
       - run: |
-          env
-          echo ${{ steps.download.outputs.godot-bin }}
-          ${{ env.GODOT_BIN }} --version
+          bash addons/gdUnit4/runtest.sh --continue --add ./test
         env:
           GODOT_BIN: ${{ steps.download.outputs.godot-bin }}
-          GODOT_VERSION: ${{ vars.GODOT_VERSION }}
