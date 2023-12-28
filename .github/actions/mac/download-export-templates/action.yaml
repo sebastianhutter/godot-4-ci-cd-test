@@ -25,3 +25,5 @@ runs:
         template_directory=${GODOT_VERSION//-/.}
         mkdir -p "${HOME}/Library/Application Support/Godot/templates/${template_directory}"
         mv templates/* "${HOME}/Library/Application Support/Godot/templates/${template_directory}/"
+      env:
+        GODOT_VERSION: ${{ inputs.version }}

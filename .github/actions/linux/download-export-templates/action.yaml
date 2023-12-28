@@ -26,6 +26,8 @@ runs:
         echo "${HOME}/.local/share/godot/templates/${template_directory}"
         mkdir -p "${HOME}/.local/share/godot/templates/${template_directory}"
         mv templates/* "${HOME}/.local/share/godot/templates/${template_directory}/"
+      env:
+        GODOT_VERSION: ${{ inputs.version }}
 
     # Windows: %APPDATA%\Godot\templates\<version>\
     # Linux: $HOME/.local/share/godot/templates/<version>/
