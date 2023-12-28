@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddtba5ksfpa5e"]
+
+[ext_resource type="Script" path="res://scenes/manager/ui_manager/ui_manager.gd" id="1_qsv6e"]
+[ext_resource type="PackedScene" uid="uid://da6a6d0vv6dly" path="res://scenes/ui/height_counter/height_counter.tscn" id="2_0gd6y"]
+
+[node name="UiManager" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_qsv6e")
+
+[node name="HeightCounter" parent="." instance=ExtResource("2_0gd6y")]

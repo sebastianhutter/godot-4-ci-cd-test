@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpyvnfjfd7ptx"]
+
+[ext_resource type="Script" path="res://scenes/components/finite_state_machine/player/player_walk.gd" id="1_8ooej"]
+
+[node name="PlayerWalk" type="Node"]
+script = ExtResource("1_8ooej")

@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://de574iosmsdho"]
+
+[node name="GroupPlatforms" type="Node2D" groups=["platforms"]]

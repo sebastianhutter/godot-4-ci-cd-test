@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bbdgx5plhgpbw"]
+
+[ext_resource type="Shader" path="res://resources/shader/raising_water/raising_water.gdshader" id="1_s0yiq"]
+
+[resource]
+shader = ExtResource("1_s0yiq")
+shader_parameter/water_color = Color(0, 0.560784, 0.584314, 0.74902)

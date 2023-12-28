@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://tcmw5uecl7me"]
+
+[ext_resource type="Script" path="res://scenes/manager/platform_manager/platform_manager.gd" id="1_ea4lc"]
+[ext_resource type="PackedScene" uid="uid://djpgf655w4cog" path="res://scenes/environment/platform_spawn_area/platform_spawn_area.tscn" id="2_kon4j"]
+
+[node name="PlatformManager" type="Node"]
+process_mode = 1
+script = ExtResource("1_ea4lc")
+
+[node name="PlatformSpawnArea" parent="." instance=ExtResource("2_kon4j")]
+unique_name_in_owner = true
+
+[node name="PlatformDeSpawnArea" parent="." instance=ExtResource("2_kon4j")]
+unique_name_in_owner = true
+
+[node name="PlatformSpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://2q8kxgj50e27"]
+
+[ext_resource type="Material" uid="uid://bbdgx5plhgpbw" path="res://resources/shader/raising_water/raising_water_shader_material.tres" id="2_250l8"]
+[ext_resource type="Script" path="res://scenes/environment/water/water.gd" id="3_cfoe7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rvppk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7qvt"]
+size = Vector2(1089, 60)
+
+[node name="Water" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_cfoe7")
+
+[node name="Water" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_250l8")
+position = Vector2(244, 806)
+scale = Vector2(5, 3.31055)
+texture = SubResource("NoiseTexture2D_rvppk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(271, 88)
+shape = SubResource("RectangleShape2D_x7qvt")

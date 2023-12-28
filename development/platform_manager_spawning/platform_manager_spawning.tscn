@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://chpupfuw1qny1"]
+
+[ext_resource type="PackedScene" uid="uid://tcmw5uecl7me" path="res://scenes/manager/platform_manager/platform_manager.tscn" id="1_i3435"]
+[ext_resource type="Script" path="res://development/platform_manager_spawning/platform_manager_spawning.gd" id="1_mtiid"]
+[ext_resource type="PackedScene" uid="uid://de574iosmsdho" path="res://scenes/group/group_platforms.tscn" id="2_ip6gt"]
+[ext_resource type="PackedScene" uid="uid://brsyvjjq8ldrm" path="res://scenes/environment/platform/platform.tscn" id="5_b0rso"]
+[ext_resource type="PackedScene" uid="uid://2q8kxgj50e27" path="res://scenes/environment/water/water.tscn" id="6_32rku"]
+[ext_resource type="Texture2D" uid="uid://bfug6w5btyu1r" path="res://icon.svg" id="6_rmp0u"]
+[ext_resource type="PackedScene" uid="uid://bd81qbuftgap7" path="res://scenes/environment/movable_camera/movable_camera.tscn" id="7_c5u0j"]
+
+[node name="PlatformManagerSpawning" type="Node2D"]
+script = ExtResource("1_mtiid")
+
+[node name="PlatformManager" parent="." instance=ExtResource("1_i3435")]
+unique_name_in_owner = true
+spawn_area_y_offset = -250
+
+[node name="GroupPlatforms" parent="." instance=ExtResource("2_ip6gt")]
+
+[node name="Platform" parent="." instance=ExtResource("5_b0rso")]
+position = Vector2(234, 1333)
+is_falling = false
+
+[node name="Water" parent="." instance=ExtResource("6_32rku")]
+position = Vector2(-1236, 1453)
+scale = Vector2(5.40167, 1.06201)
+
+[node name="FakePlayer" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(240, 1191)
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="FakePlayer"]
+texture = ExtResource("6_rmp0u")
+
+[node name="MovableCamera" parent="." instance=ExtResource("7_c5u0j")]
+position = Vector2(484, 710)

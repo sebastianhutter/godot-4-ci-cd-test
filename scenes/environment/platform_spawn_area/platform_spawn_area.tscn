@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://djpgf655w4cog"]
+
+[ext_resource type="Script" path="res://scenes/environment/platform_spawn_area/platform_spawn_area.gd" id="1_fl6ku"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_tpupm"]
+a = Vector2(2.08165e-12, 2.08165e-12)
+b = Vector2(960, 0)
+
+[node name="PlatformSpawnArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 268435456
+script = ExtResource("1_fl6ku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("SegmentShape2D_tpupm")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://brsyvjjq8ldrm"]
+
+[ext_resource type="Script" path="res://scenes/environment/platform/platform.gd" id="1_h1064"]
+[ext_resource type="Texture2D" uid="uid://bno434q81ci1b" path="res://assets/gfx/environment/platforms/ground_grass.png" id="2_66mpf"]
+
+[node name="Platform" type="AnimatableBody2D" groups=["platform"]]
+position = Vector2(0, 68597.9)
+collision_layer = 268435457
+collision_mask = 0
+script = ExtResource("1_h1064")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("2_66mpf")
+
+[node name="CollisionPolygonPlatform" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(190, -41.6, 190, -7.8, 167.2, 33, 165.8, 33, 158.8, 40, 142, 40, -26, 47, -165, 47, -190, -4.4, -190, -41.6, -184, -46.9, 184, -47)
+
+[node name="CollisionPolygonPlatformSmall" type="CollisionPolygon2D" parent="."]
+unique_name_in_owner = true
+visible = false
+polygon = PackedVector2Array(100.5, -44.6, 100.5, -6.8, 82.9, 44, 81.6, 44, 77.9, 50, -10, 50, -74.5, 45.9, -74.5, 44.7, -79.5, 43.6, -79.5, 41.7, -86.5, 33.8, -86.5, 30.4, -100.5, -7.2, -100.5, -42.8, -93.5, -49.8, 94.5, -50)
+disabled = true
