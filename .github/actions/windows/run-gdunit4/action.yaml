@@ -16,7 +16,9 @@ runs:
     - name: Re-import project files
       shell: pwsh
       run: |
-        & $Env:GODOT_BIN --headless --editor --quit-after 60 .
+        $cli = $Env:GODOT_BIN + " --headless --editor --quit-after 60 ."
+        echo $cli
+        $cli
       env:
         GODOT_BIN: "${{ inputs.binary }}"
     - name: Run tests
