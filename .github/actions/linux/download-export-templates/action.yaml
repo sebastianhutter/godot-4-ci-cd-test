@@ -14,15 +14,18 @@ outputs: {}
 runs:
   using: "composite"
   steps:
-    - id: download
-      shell: bash
+    - shell: bash
       run: |
-        curl -L https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION/Godot_$GODOT_VERSION-stable_export_templates.tpz -o templates.zip
+        curl -L https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_${GODOT_VERSION}_export_templates.tpz -o templates.zip
         unzip templates.zip
         ls -lah
       env:
         GODOT_VERSION: ${{ inputs.version }}
-
+    # - shell: bash
+    #   run: |
+    #     mkdir -p ~/.local/share/godot/templates/$GODOT_VERSION
+    #     mv templates/* ~/.local/share/godot/templates/$GODOT_VERSION
+    #     ls -lah ~/.local/share/godot/templates/$GODOT_VERSION
 
     # Windows: %APPDATA%\Godot\templates\<version>\
     # Linux: $HOME/.local/share/godot/templates/<version>/
