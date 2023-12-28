@@ -9,7 +9,7 @@ inputs:
   version:
     description: "The version of Godot to download"
     required: true
-    default: "4.2.1"
+    default: "4.2.1-stable"
 outputs:
   godot-bin:
     description: "The path to the Godot.app"
@@ -21,8 +21,8 @@ runs:
     - id: download
       shell: bash
       run: |
-        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_macos.universal.zip
-        unzip Godot_v$GODOT_VERSION-stable_macos.universal.zip
+        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION/Godot_v$GODOT_VERSION_macos.universal.zip
+        unzip Godot_v$GODOT_VERSION_macos.universal.zip
         echo "godot-bin=$PWD/Godot.app" >> $GITHUB_OUTPUT
       env:
         GODOT_VERSION: ${{ inputs.version }}

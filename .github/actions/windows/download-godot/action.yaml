@@ -9,7 +9,7 @@ inputs:
   version:
     description: "The version of Godot to download"
     required: true
-    default: "4.2.1"
+    default: "4.2.1-stable"
 outputs:
   godot-bin:
     description: "The path to the Godot.app"
@@ -21,10 +21,10 @@ runs:
     - id: download
       shell: pwsh
       run: |
-        $name = "Godot_v" + $Env:GODOT_VERSION + "-stable_win64"
+        $name = "Godot_v" + $Env:GODOT_VERSION + "_win64"
         $zip = $name + ".exe.zip"
         $bin = $name + ".exe" 
-        $download_url = "https://github.com/godotengine/godot-builds/releases/download/" + $Env:GODOT_VERSION + "-stable/" + $zip
+        $download_url = "https://github.com/godotengine/godot-builds/releases/download/" + $Env:GODOT_VERSION + "/" + $zip
         $local_full_path_to_bin = Join-Path -Path $PWD $bin
         $output = "godot-bin=" + $local_full_path_to_bin
 

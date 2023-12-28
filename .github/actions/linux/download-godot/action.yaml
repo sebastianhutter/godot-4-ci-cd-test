@@ -9,7 +9,7 @@ inputs:
   version:
     description: "The version of Godot to download"
     required: true
-    default: "4.2.1"
+    default: "4.2.1-stable"
 outputs:
   godot-bin:
     description: "The path to the Godot binary"
@@ -21,9 +21,9 @@ runs:
     - id: download
       shell: bash
       run: |
-        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
-        unzip Godot_v$GODOT_VERSION-stable_linux.x86_64.zip
-        chmod +x Godot_v$GODOT_VERSION-stable_linux.x86_64
-        echo "godot-bin=$PWD/Godot_v$GODOT_VERSION-stable_linux.x86_64" >> $GITHUB_OUTPUT
+        curl -LO https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION/Godot_v$GODOT_VERSION_linux.x86_64.zip
+        unzip Godot_v$GODOT_VERSION_linux.x86_64.zip
+        chmod +x Godot_v$GODOT_VERSION_linux.x86_64
+        echo "godot-bin=$PWD/Godot_v$GODOT_VERSION_linux.x86_64" >> $GITHUB_OUTPUT
       env:
         GODOT_VERSION: ${{ inputs.version }}
