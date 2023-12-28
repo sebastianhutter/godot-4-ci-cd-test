@@ -11,7 +11,7 @@ jobs:
       - name: install requirements
         run: |
           sudo apt-get update > /dev/null
-          sudo apt-get install -y --qq xvfb
+          sudo apt-get install -y xvfb > /dev/null
       - id: download
         name: download godot
         uses: ./.github/actions/linux/download-godot
