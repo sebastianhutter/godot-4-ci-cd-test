@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: download godot
-        uses: ./.github/actions/linux/download-godot.yaml
+        uses: ./.github/actions/linux/download-godot
       - run: |
           env
           ${{ env.GODOT_BIN }} --version
