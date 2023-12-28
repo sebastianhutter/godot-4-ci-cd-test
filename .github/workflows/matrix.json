@@ -3,22 +3,27 @@
         {
             "export_preset": "linux",
             "os": "linux",
-            "runner": "ubuntu-latest"
+            "runner": "ubuntu-latest",
+            "filename": "test.bin"
         },
         {
             "export_preset": "windows",
             "os": "windows",
-            "runner": "windows-latest"
+            "runner": "windows-latest",
+            "filename": "test.exe"
+
         },
         {
             "export_preset": "mac",
             "os": "mac",
-            "runner": "macos-latest"
+            "runner": "macos-latest",
+            "filename": "test.dmg"
         },
         {
             "export_preset": "web",
             "os": "linux",
-            "runner": "ubuntu-latest"
+            "runner": "ubuntu-latest",
+            "filename": "test.html"
         }
     ]
 }
