@@ -39,3 +39,4 @@ runs:
       with:
         name: ${{ inputs.filename }}.zip
         path: ${{ inputs.filename }}.zip
+        retention-days: ${{ inputs.retention }}
