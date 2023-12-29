@@ -23,10 +23,13 @@ outputs: {} # no outputs
 runs:
   using: "composite"
   steps:
-    - name: Export release
+    - name: Prepare export dir
       shell: pwsh
       run: |
         New-Item .ci-build -ItemType Directory -ea 0
+    - name: Export release
+      shell: pwsh
+      run: |
         $export_path = Join-Path -Path ".ci-build" $Env:FILENAME
         Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --export-release $Env:PRESET $export_path" -Wait
       env:
