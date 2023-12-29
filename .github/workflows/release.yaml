@@ -127,6 +127,30 @@ jobs:
       uses: KikimoraGames/itch-publish@v0.0.3
       with:
         butlerApiKey: ${{ secrets.ITCHIO_API_KEY }}
+        gameData: linux.zip
+        itchUsername: ${{ vars.ITCHIO_USERNAME }}
+        itchGameId: ${{ vars.ITCHIO_GAME_ID }}
+        buildChannel: "linux"
+        buildNumber: ${{ github.ref }}
+    - uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerApiKey: ${{ secrets.ITCHIO_API_KEY }}
+        gameData: mac.zip
+        itchUsername: ${{ vars.ITCHIO_USERNAME }}
+        itchGameId: ${{ vars.ITCHIO_GAME_ID }}
+        buildChannel: "mac"
+        buildNumber: ${{ github.ref }}
+    - uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerApiKey: ${{ secrets.ITCHIO_API_KEY }}
+        gameData: windows.zip
+        itchUsername: ${{ vars.ITCHIO_USERNAME }}
+        itchGameId: ${{ vars.ITCHIO_GAME_ID }}
+        buildChannel: "windows"
+        buildNumber: ${{ github.ref }}
+    - uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerApiKey: ${{ secrets.ITCHIO_API_KEY }}
         gameData: web.zip
         itchUsername: ${{ vars.ITCHIO_USERNAME }}
         itchGameId: ${{ vars.ITCHIO_GAME_ID }}
