@@ -29,7 +29,7 @@ runs:
         mkdir .ci-build
         $GODOT_BIN --headless --export-release "${PRESET}" ".ci-build/${FILENAME}"
       env:
-        GODOT_BIN: ${{ inputs.binary }}
+        GODOT_BIN: "${{ inputs.binary }}/Contents/MacOS/Godot"
         PRESET: ${{ inputs.preset }}
         FILENAME: ${{ inputs.filename }}
     - name: Archive build
