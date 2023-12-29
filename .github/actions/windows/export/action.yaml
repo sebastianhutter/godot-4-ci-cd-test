@@ -27,7 +27,8 @@ runs:
       shell: pwsh
       run: |
         New-Item .ci-build -ItemType Directory -ea 0
-        Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --export-release $Env:PRESET .ci-build/$Env:FILENAME" -Wait
+        $export_path = Join-Path -Path ".ci-build" $Env:FILENAME
+        Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --export-release $Env:PRESET $export_path" -Wait
       env:
         GODOT_BIN: ${{ inputs.binary }}
         PRESET: ${{ inputs.preset }}
