@@ -1,5 +1,8 @@
 #
 # build the game on pushes to main
+# this should ensure that the build is valid at any time
+# but godot currently has a bug that still marks a failed export as successful
+# https://github.com/godotengine/godot/issues/83042
 #
 
 name: Run a multi os build on pushes to main
