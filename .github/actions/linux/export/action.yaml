@@ -1,0 +1,41 @@
+#
+# exports the compiled game for the given export preset with the given godot binary
+#
+
+name: "Run gdUnit4 tests"
+description: "Run gdunit4 tests"
+inputs:
+  binary:
+    description: "The path to the godot binary"
+    required: true
+  preset:
+    description: "The export preset to use"
+    required: true
+  filename:
+    description: "The filename of the exported game"
+    required: true
+  retention:
+    description: "The number of days to keep the build"
+    required: true
+    default: "3"
+outputs: {} # no outputs
+
+runs:
+  using: "composite"
+  steps:
+    - name: Re-import project files
+      shell: bash
+      run: |
+        mkdir .ci-build
+        $GODOT_BIN --headless --export-release "${PRESET}" ".ci-build/${FILENAME}"
+        cd .ci-build
+        zip -r "../${FILENAME}.zip" "${FILENAME}"
+      env:
+        GODOT_BIN: ${{ inputs.binary }}
+        PRESET: ${{ inputs.preset }}
+        FILENAME: ${{ inputs.filename }}
+    - name: Archive build
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.filename }}.zip
+        path: ${{ inputs.filename }}.zip

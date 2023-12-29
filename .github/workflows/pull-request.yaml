@@ -1,3 +1,7 @@
+#
+# execute gdunit4 tests on pushes to branches with pull requests
+#
+
 name: Run tests on pull request
 on:
   workflow_dispatch:

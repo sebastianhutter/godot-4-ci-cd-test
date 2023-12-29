@@ -1,3 +1,7 @@
+#
+# build the game on pushes to main
+#
+
 name: Run a multi os build on pushes to main
 on:
   workflow_dispatch:
@@ -11,32 +15,31 @@ permissions:
     id-token: write
 jobs:
   # thanks to https://www.jitsejan.com/use-github-actions-with-json-file-as-matrix
-  configure-matrix:
+  load-configuration:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.load-matrix.outputs.json }}
+      configuration: ${{ steps.load-configuration.outputs.json }}
     steps:
       - uses: actions/checkout@v2
-      - id: load-matrix
-        run: echo "json=$(jq -c . < .github/workflows/matrix.json)" >> $GITHUB_OUTPUT
-  build:
-    needs: configure-matrix
-    strategy:
-      fail-fast: true
-      matrix: ${{ fromJson(needs.configure-matrix.outputs.matrix) }}
-    runs-on: ${{ matrix.runner }}
+      - id: load-configuration
+        run: echo "json=$(jq -c . < .github/workflows/config.json)" >> $GITHUB_OUTPUT
+  build-linux:
+    needs: load-configuration
+    runs-on: ${{ fromJson(needs.load-configuration.outputs.configuration).linux.runner }}
     timeout-minutes: 900
     steps:
       - uses: actions/checkout@v2      
       - id: download
         name: download godot
-        uses: ./.github/actions/_all/download-godot
+        uses: ./.github/actions/${{ fromJson(needs.load-configuration.outputs.configuration).linux.os }}/download-godot
         with:
-          os: ${{ matrix.os }}
           version: ${{ vars.GODOT_VERSION }}
       - name: download export templates
-        uses: ./.github/actions/_all/download-export-templates
+        uses: ./.github/actions/${{ fromJson(needs.load-configuration.outputs.configuration).linux.os }}/download-export-templates
         with:
-          os: ${{ matrix.os }}
           version: ${{ vars.GODOT_VERSION }}
-      
+      # - name: export game
+      #   uses: ./.github/actions/${{ fromJson(needs.load-configuration.outputs.configuration).linux.os }}/export
+      #   with:
+
+      #     version: ${{ vars.GODOT_VERSION }}

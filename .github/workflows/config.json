@@ -1,0 +1,26 @@
+{
+    "linux": {
+        "export_preset": "linux",
+        "os": "linux",
+        "runner": "ubuntu-latest",
+        "filename": "test.bin"
+    },
+    "windows": {
+        "export_preset": "windows",
+        "os": "windows",
+        "runner": "windows-latest",
+        "filename": "test.exe"
+    },
+    "mac": {
+        "export_preset": "mac",
+        "os": "mac",
+        "runner": "macos-latest",
+        "filename": "test.dmg"
+    },
+    "web": {
+        "export_preset": "web",
+        "os": "linux",
+        "runner": "ubuntu-latest",
+        "filename": "test.html"
+    }
+}
