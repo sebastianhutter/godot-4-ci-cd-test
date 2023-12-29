@@ -93,33 +93,33 @@ jobs:
         with:
           binary: ${{ steps.download-web.outputs.godot-bin }}
           preset: "web"
-          filename: "test.html"
+          filename: "index.html"
   release:
     needs: [linux, mac, windows, web]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v3
     # create zip archives from the downloaded files
-    # - run: |
-      
-    # - uses: actions/download-artifact@v4
-    #   with:
-    #     name: test.dmg
-    #     path: test.dmg
-    # - uses: actions/download-artifact@v4
-    #   with:
-    #     name: test.exe
-    #     path: test.exe
-    # - uses: actions/download-artifact@v4
-    #   with:
-    #     name: test.html
-    #     path: test.html
-    - name: Display structure of downloaded files
-      run: ls -R
-      # - name: Create Release
-      #   id: create_release
-      #   uses: softprops/action-gh-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     files: ////
+    - run: |
+        cd linux
+        zip -r ../linux.zip .
+    - run: |
+        cd mac
+        zip -r ../mac.zip .
+    - run: |
+        cd windows
+        zip -r ../windows.zip .
+    - run: |
+        cd web
+        zip -r ../web.zip .
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: |
+          linux.zip
+          mac.zip
+          windows.zip
+          web.zip
