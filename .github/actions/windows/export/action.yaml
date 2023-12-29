@@ -39,7 +39,7 @@ runs:
     - name: Archive build
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.filename }}
+        name: ${{ inputs.preset }}
         path: .ci-build/**/*
         retention-days: ${{ inputs.retention }}
         if-no-files-found: error

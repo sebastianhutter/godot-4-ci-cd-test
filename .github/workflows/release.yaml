@@ -103,8 +103,8 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/download-artifact@v4
       with:
-        name: test.bin
-        path: test.bin
+        name: linux
+        path: linux
     # - uses: actions/download-artifact@v4
     #   with:
     #     name: test.dmg
