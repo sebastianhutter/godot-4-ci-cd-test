@@ -35,86 +35,87 @@ jobs:
           binary: ${{ steps.godot-linux.outputs.godot-bin }}
           preset: "linux"
           filename: "test.bin"
-  mac:
-    runs-on: macos-latest
-    timeout-minutes: 900
-    steps:
-      - uses: actions/checkout@v2      
-      - id: download-mac
-        name: download godot
-        uses: ./.github/actions/mac/download-godot
-        with:
-          version: ${{ vars.GODOT_VERSION }}
-      - name: download export templates
-        uses: ./.github/actions/mac/download-export-templates
-        with:
-          version: ${{ vars.GODOT_VERSION }}
-      - name: export game
-        uses: ./.github/actions/mac/export
-        with:
-          binary: ${{ steps.download-mac.outputs.godot-bin }}
-          preset: "mac"
-          filename: "test.dmg"
-  windows:
-    runs-on: windows-latest
-    timeout-minutes: 900
-    steps:
-      - uses: actions/checkout@v2      
-      - id: download-windows
-        name: download godot
-        uses: ./.github/actions/windows/download-godot
-        with:
-          version: ${{ vars.GODOT_VERSION }}
-      - name: download export templates
-        uses: ./.github/actions/windows/download-export-templates
-        with:
-          version: ${{ vars.GODOT_VERSION }}
-      - name: export game
-        uses: ./.github/actions/windows/export
-        with:
-          binary: ${{ steps.download-windows.outputs.godot-bin }}
-          preset: "windows"
-          filename: "test.exe"
-  web:
-    runs-on: ubuntu-latest
-    timeout-minutes: 900
-    steps:
-      - uses: actions/checkout@v2      
-      - id: download-web
-        name: download godot
-        uses: ./.github/actions/linux/download-godot
-        with:
-          version: ${{ vars.GODOT_VERSION }}
-      - name: download export templates
-        uses: ./.github/actions/linux/download-export-templates
-        with:
-          version: ${{ vars.GODOT_VERSION }}
-      - name: export game
-        uses: ./.github/actions/linux/export
-        with:
-          binary: ${{ steps.download-web.outputs.godot-bin }}
-          preset: "web"
-          filename: "test.html"
+  # mac:
+  #   runs-on: macos-latest
+  #   timeout-minutes: 900
+  #   steps:
+  #     - uses: actions/checkout@v2      
+  #     - id: download-mac
+  #       name: download godot
+  #       uses: ./.github/actions/mac/download-godot
+  #       with:
+  #         version: ${{ vars.GODOT_VERSION }}
+  #     - name: download export templates
+  #       uses: ./.github/actions/mac/download-export-templates
+  #       with:
+  #         version: ${{ vars.GODOT_VERSION }}
+  #     - name: export game
+  #       uses: ./.github/actions/mac/export
+  #       with:
+  #         binary: ${{ steps.download-mac.outputs.godot-bin }}
+  #         preset: "mac"
+  #         filename: "test.dmg"
+  # windows:
+  #   runs-on: windows-latest
+  #   timeout-minutes: 900
+  #   steps:
+  #     - uses: actions/checkout@v2      
+  #     - id: download-windows
+  #       name: download godot
+  #       uses: ./.github/actions/windows/download-godot
+  #       with:
+  #         version: ${{ vars.GODOT_VERSION }}
+  #     - name: download export templates
+  #       uses: ./.github/actions/windows/download-export-templates
+  #       with:
+  #         version: ${{ vars.GODOT_VERSION }}
+  #     - name: export game
+  #       uses: ./.github/actions/windows/export
+  #       with:
+  #         binary: ${{ steps.download-windows.outputs.godot-bin }}
+  #         preset: "windows"
+  #         filename: "test.exe"
+  # web:
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 900
+  #   steps:
+  #     - uses: actions/checkout@v2      
+  #     - id: download-web
+  #       name: download godot
+  #       uses: ./.github/actions/linux/download-godot
+  #       with:
+  #         version: ${{ vars.GODOT_VERSION }}
+  #     - name: download export templates
+  #       uses: ./.github/actions/linux/download-export-templates
+  #       with:
+  #         version: ${{ vars.GODOT_VERSION }}
+  #     - name: export game
+  #       uses: ./.github/actions/linux/export
+  #       with:
+  #         binary: ${{ steps.download-web.outputs.godot-bin }}
+  #         preset: "web"
+  #         filename: "test.html"
   release:
-    needs: [linux, mac, windows, web]
+    needs: [linux]
+    #needs: [linux, mac, windows, web]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v4
       with:
         name: test.bin
         path: test.bin
-    - uses: actions/download-artifact@v4
-      with:
-        name: test.dmg
-        path: test.dmg
-    - uses: actions/download-artifact@v4
-      with:
-        name: test.exe
-        path: test.exe
-    - uses: actions/download-artifact@v4
-      with:
-        name: test.html
-        path: test.html
+    # - uses: actions/download-artifact@v4
+    #   with:
+    #     name: test.dmg
+    #     path: test.dmg
+    # - uses: actions/download-artifact@v4
+    #   with:
+    #     name: test.exe
+    #     path: test.exe
+    # - uses: actions/download-artifact@v4
+    #   with:
+    #     name: test.html
+    #     path: test.html
     - name: Display structure of downloaded files
       run: ls -R
       # - name: Create Release
