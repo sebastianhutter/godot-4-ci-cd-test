@@ -123,3 +123,12 @@ jobs:
           mac.zip
           windows.zip
           web.zip
+    - name: Upload latest release to itch.io
+      uses: KikimoraGames/itch-publish@v0.0.3
+      with:
+        butlerApiKey: ${{ secrets.ITCHIO_API_KEY }}
+        gameData: web.zip
+        itchUsername: ${{ vars.ITCHIO_USERNAME }}
+        itchGameId: ${{ vars.ITCHIO_GAME_ID }}
+        buildChannel: "HTML5"
+        buildNumber: ${{ github.ref }}

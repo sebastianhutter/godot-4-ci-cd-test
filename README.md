@@ -21,9 +21,12 @@ For the workflows to work you need to define the following action variables and 
 
 ***Variables***
 - GODOT_VERSION: 4.2.1-stable
+- ITCHIO_USERNAME: youritchiousername
+- ITCHIO_GAME_ID: yourgameidonitchio
 
 ***Secrets**
 
+- ITCHIO_API_KEY: youritchioapikey
 
 ## TODOS
 
