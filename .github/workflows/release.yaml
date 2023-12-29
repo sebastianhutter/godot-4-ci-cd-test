@@ -100,6 +100,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v4
+      with:
+        name: test.bin
+        path: test.bin
+    - uses: actions/download-artifact@v4
+      with:
+        name: test.dmg
+        path: test.dmg
+    - uses: actions/download-artifact@v4
+      with:
+        name: test.exe
+        path: test.exe
+    - uses: actions/download-artifact@v4
+      with:
+        name: test.html
+        path: test.html
     - name: Display structure of downloaded files
       run: ls -R
       # - name: Create Release
