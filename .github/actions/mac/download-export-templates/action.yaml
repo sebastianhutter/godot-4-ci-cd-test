@@ -23,7 +23,7 @@ runs:
     - shell: bash
       run: |
         template_directory=${GODOT_VERSION//-/.}
-        mkdir -p "${HOME}/Library/Application Support/Godot/templates/${template_directory}"
-        mv templates/* "${HOME}/Library/Application Support/Godot/templates/${template_directory}/"
+        mkdir -p "${HOME}/Library/Application Support/Godot/export_templates/${template_directory}"
+        mv templates/* "${HOME}/Library/Application Support/Godot/export_templates/${template_directory}/"
       env:
         GODOT_VERSION: ${{ inputs.version }}
