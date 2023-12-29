@@ -48,12 +48,12 @@ jobs:
         uses: ./.github/actions/mac/download-export-templates
         with:
           version: ${{ vars.GODOT_VERSION }}
-      # - name: export game
-      #   uses: ./.github/actions/mac/export
-      #   with:
-      #     binary: ${{ steps.download-mac.outputs.godot-bin }}
-      #     preset: "mac"
-      #     filename: "test.dmg"
+      - name: export game
+        uses: ./.github/actions/mac/export
+        with:
+          binary: ${{ steps.download-mac.outputs.godot-bin }}
+          preset: "mac"
+          filename: "test.dmg"
   windows:
     runs-on: windows-latest
     timeout-minutes: 900
@@ -88,9 +88,9 @@ jobs:
         uses: ./.github/actions/linux/download-export-templates
         with:
           version: ${{ vars.GODOT_VERSION }}
-      # - name: export game
-      #   uses: ./.github/actions/linux/export
-      #   with:
-      #     binary: ${{ steps.download-web.outputs.godot-bin }}
-      #     preset: "mac"
-      #     filename: "test.dmg"
+      - name: export game
+        uses: ./.github/actions/linux/export
+        with:
+          binary: ${{ steps.download-web.outputs.godot-bin }}
+          preset: "web"
+          filename: "test.html"

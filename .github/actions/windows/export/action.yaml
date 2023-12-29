@@ -23,8 +23,8 @@ outputs: {} # no outputs
 runs:
   using: "composite"
   steps:
-    - name: Re-import project files
-      shell: bash
+    - name: Export release
+      shell: pwsh
       run: |
         mkdir .ci-build
         $GODOT_BIN --headless --export-release "${PRESET}" ".ci-build/${FILENAME}"
@@ -38,5 +38,6 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.filename }}.zip
-        path: ${{ inputs.filename }}.zip
+        path: .ci-build/**/*
         retention-days: ${{ inputs.retention }}
+        if-no-files-found: error
