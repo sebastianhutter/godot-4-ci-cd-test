@@ -26,10 +26,8 @@ runs:
     - name: Export release
       shell: pwsh
       run: |
-        mkdir .ci-build
-        $GODOT_BIN --headless --export-release "${PRESET}" ".ci-build/${FILENAME}"
-        cd .ci-build
-        zip -r "../${FILENAME}.zip" "${FILENAME}"
+        New-Item .ci-build -ItemType Directory -ea 0
+        Start-Process -FilePath $Env:GODOT_BIN -ArgumentList "--headless --export-release \"$Env:PRESET\" \".ci-build/$Env:FILENAME\"" -Wait
       env:
         GODOT_BIN: ${{ inputs.binary }}
         PRESET: ${{ inputs.preset }}
