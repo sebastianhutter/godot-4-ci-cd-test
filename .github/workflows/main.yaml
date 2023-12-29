@@ -8,10 +8,9 @@
 name: Run a multi os build on pushes to main
 on:
   workflow_dispatch:
-  # TODO: enable push on main after release is fixed
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 # check write permissions are required for junit step
 permissions:
     contents: read

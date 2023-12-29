@@ -13,7 +13,7 @@ The repository contains three different workflows
 
 - PR: The PR workflow is executed on pull request and runs gdunit4 tests
 - Main: The Main workflow is executed on changes to main and compiles the games and adds the build artifacts to the job execution
-- Release: The release workflow is executed when a new tag is created
+- Release: The release workflow is executed on a release tag (v*). It creates a new github release and uploads the exported game to [itch.io](https://sebastianhutter.itch.io/cicd-test).
 
 ### Environment and Secrets
 
@@ -27,14 +27,6 @@ For the workflows to work you need to define the following action variables and 
 ***Secrets**
 
 - ITCHIO_API_KEY: youritchioapikey
-
-## TODOS
-
-Todo list will be removed sooner or later
-- [ ] create core game mechanic
-- [ ] add gdunit4 test cases
-- [ ] add githubworkflows for pr, main builds 
-- [ ] add python scripts to publish to itch.io
 
 ## Assets
 
