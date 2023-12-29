@@ -12,8 +12,8 @@ objects while climbing.
 The repository contains three different workflows
 
 - PR: The PR workflow is executed on pull request and runs gdunit4 tests
-- Main: The Main workflow is executed on changes to main and compiles the game and adds them as a pre-release 
-- Release: The release workflow is executed when a new release is created, it builds and releases the game and sends it to itch.io!
+- Main: The Main workflow is executed on changes to main and compiles the games and adds the build artifacts to the job execution
+- Release: The release workflow is executed when a new tag is created
 
 ### Environment and Secrets
 
